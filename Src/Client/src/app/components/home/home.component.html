@@ -1,5 +1,18 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+<div class="window">
+  <!-- .toolbar-header sits at the top of your app -->
+  <header class="toolbar toolbar-header">
+    <h1 class="title">Photon</h1>
+  </header>
+
+  <!-- Your app's content goes inside .window-content -->
+  <div class="window-content">
+      <div class="pane-group">
+          <div class="pane-mini sidebar">
+            <app-sidemenu></app-sidemenu>
+          </div>
+          <div class="pane">
+              <app-tab></app-tab>
+          </div>
+        </div>
+  </div>
 </div>

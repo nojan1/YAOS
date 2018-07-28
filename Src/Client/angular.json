@@ -17,6 +17,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
+              "src/photon/fonts",
               "src/assets",
               "src/favicon.ico",
               "src/favicon.png",
@@ -25,6 +26,8 @@
               "src/favicon.512x512.png"
             ],
             "styles": [
+              "node_modules/electron-tabs/electron-tabs.css",
+              "src/photon/css/photon.min.css",
               "src/styles.scss"
             ],
             "scripts": []
