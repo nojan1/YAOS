@@ -22,6 +22,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { TabComponent } from './components/tab/tab.component';
+import { TabContentContainer } from './components/tab/tab-content-container.component';
+import { CheckpointsComponent } from './components/checkpoints/checkpoints.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,7 +36,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     WebviewDirective,
     SidemenuComponent,
-    TabComponent
+    TabComponent,
+    TabContentContainer,
+    CheckpointsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [ElectronService, TabService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CheckpointsComponent]
 })
 export class AppModule { }

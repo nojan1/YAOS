@@ -26,7 +26,6 @@
               "src/favicon.512x512.png"
             ],
             "styles": [
-              "node_modules/electron-tabs/electron-tabs.css",
               "src/photon/css/photon.min.css",
               "src/styles.scss"
             ],

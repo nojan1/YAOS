@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TabService } from '../../providers/tab.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidemenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tabService: TabService) { }
 
   ngOnInit() {
+  }
+
+  public openTab(){
+    this.tabService.openTab();
   }
 
 }

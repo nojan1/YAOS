@@ -9,7 +9,7 @@ import { TabService } from '../../providers/tab.service';
 })
 export class TabComponent implements OnInit {
 
-  constructor(private tabService: TabService) { }
+  constructor(public tabService: TabService) { }
 
   ngOnInit() {
     this.tabService.init();
