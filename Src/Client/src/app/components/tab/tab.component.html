@@ -1,11 +1,13 @@
-
 <div class="tab-group">
-    <div class="tab-item" *ngFor="let tab of tabService.tabs" [class.active]="tab == tabService.activeTab" (click)="tabService.setActive(tab)">
-        <span class="icon icon-cancel icon-close-tab" (click)="tabService.closeTab(tab)"></span>
-        {{tab.title}}
-    </div>
+  <div class="tab-item" *ngFor="let tab of tabService.tabs" [class.active]="tab == tabService.activeTab" (click)="tabService.setActive(tab)">
+    <span class="icon icon-cancel icon-close-tab" (click)="tabService.closeTab(tab)"></span>
+    {{tab.title}}
   </div>
+</div>
 
-  <div *ngFor="let tab of tabService.tabs" [style.display]="tab == tabService.activeTab ? 'block' : 'none'">
+<div style="clear:both;"></div>
+<div>
+  <div *ngFor="let tab of tabService.tabs" [style.display]="tab == tabService.activeTab ? 'block' : 'none'" class="tab-container">
     <app-tab-content-container [tab]="tab"></app-tab-content-container>
   </div>
+</div>
