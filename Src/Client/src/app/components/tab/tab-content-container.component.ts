@@ -1,5 +1,5 @@
 import { Component, OnInit, ComponentFactoryResolver, Input, ViewContainerRef, OnDestroy, ComponentRef } from '@angular/core';
-import { Tab, TabbedComponent } from '../../providers/tab.service';
+import { Tab, TabbedComponent, TabService } from '../../providers/tab.service';
 
 @Component({
   selector: 'app-tab-content-container',
@@ -11,7 +11,7 @@ export class TabContentContainer implements OnInit, OnDestroy {
 
   private componentRef: ComponentRef<any>;
 
-  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) { }
+  constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef, private tabService: TabService) { }
 
   ngOnInit() {
     if(!this.tab)
@@ -21,10 +21,6 @@ export class TabContentContainer implements OnInit, OnDestroy {
     this.componentRef = this.viewContainerRef.createComponent(factory);
 
     let tabbedComponent = this.componentRef.instance as TabbedComponent; 
-    // if(tabbedComponent.title)
-    //     this.tab.title = tabbedComponent.title;
-    // else
-    //     this.tab.title = "Ny tab";
   }
 
   ngOnDestroy() {

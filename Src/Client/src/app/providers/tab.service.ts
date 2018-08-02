@@ -1,13 +1,12 @@
 import { Injectable, Type } from '@angular/core';
-import { CheckpointsComponent } from '../components/checkpoints/checkpoints.component';
 
 export interface Tab {
   title: string;
-  componentType: Type<any>;
+  componentType: Type<TabbedComponent>;
 }
 
 export interface TabbedComponent {
-  title: string;
+  titleChange : (newTitle: string) => void;  
 }
 
 @Injectable({
@@ -24,10 +23,10 @@ export class TabService {
 
   }
 
-  public openTab(){
+  public openTab(componentType: Type<TabbedComponent>){
     this.tabs.push({
-      title: "Test",
-      componentType: CheckpointsComponent
+      title: "Ny tab",
+      componentType: componentType
     });
 
     this.activeTab = this.tabs[this.tabs.length - 1];
@@ -55,5 +54,12 @@ export class TabService {
     }
 
     this.tabs.splice(tabIndex, 1);
+  }
+
+  public setTitle(tab: Tab, title: string){
+    if(this.tabs.indexOf(tab) == -1)
+      throw new Error("Tab not recognized");
+
+      tab.title = title;
   }
 }

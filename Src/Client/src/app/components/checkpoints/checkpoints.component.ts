@@ -7,15 +7,15 @@ import { TabbedComponent } from '../../providers/tab.service';
   styleUrls: ['./checkpoints.component.scss']
 })
 export class CheckpointsComponent implements OnInit, TabbedComponent {
-  title: string;
-
+  titleChange: (newTitle: string) => void;
+  
   public date: string;
 
   constructor() { }
 
   ngOnInit() {
     this.date = new Date().toTimeString();
-    this.title = "Tab: " + (new Date().getTime());
+    //this.titleChange("Tab: " + (new Date().getTime()));
   }
 
 }

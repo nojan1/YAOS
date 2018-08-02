@@ -1,3 +1,13 @@
 <div class="commandpalete">
-  <input type="text" />
+  <input type="text" (click)="outputOpen = true" (input)="onInput($event)" (keyup)="onKeyUp($event)" (focusout)="closeOutput()"/>
+
+  <div class="output" *ngIf="outputOpen">
+      <ul class="list-group">
+          <li class="list-group-item active" *ngFor="let commandItem of commandItems" [class.active]="commandItem == activeCommandItem" (click)="selectCommandItem(commandItem)">
+            <div class="media-body">
+              <strong>{{commandItem.title}}</strong>
+            </div>
+          </li>
+        </ul>
+  </div>
 </div>

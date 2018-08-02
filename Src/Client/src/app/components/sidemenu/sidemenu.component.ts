@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TabService } from '../../providers/tab.service';
+import { CheckpointsComponent } from '../checkpoints/checkpoints.component';
 
 @Component({
   selector: 'app-sidemenu',
@@ -14,7 +15,7 @@ export class SidemenuComponent implements OnInit {
   }
 
   public openTab(){
-    this.tabService.openTab();
+    this.tabService.openTab(CheckpointsComponent);
   }
 
 }

@@ -1,7 +1,30 @@
+$commandOutputBorder: gray;
+
 .commandpalete {
     margin: 5px;
 
     input {
         width: 100%;
+        margin-bottom:0;
+    }
+
+    .output {
+        padding-top:0;
+        z-index: 10;
+        position: absolute;
+        margin-left:0;
+        right:-5px;
+        width:100%;
+        max-height: 500px;
+        overflow-y: auto;
+        background: white;
+
+        border-left: 1px solid $commandOutputBorder;
+        border-bottom: 1px solid $commandOutputBorder;
+        border-right: 1px solid $commandOutputBorder;
+
+       .list-group-item {
+           cursor:hand;
+       }
     }
 }

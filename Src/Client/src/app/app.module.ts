@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ElectronService } from './providers/electron.service';
 import { TabService } from './providers/tab.service';
+import { CommandService } from './providers/command.service';
 
 import { WebviewDirective } from './directives/webview.directive';
 
@@ -55,7 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ElectronService, TabService],
+  providers: [ElectronService, TabService, CommandService],
   bootstrap: [AppComponent],
   entryComponents: [CheckpointsComponent]
 })
