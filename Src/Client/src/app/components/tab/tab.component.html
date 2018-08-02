@@ -5,8 +5,7 @@
   </div>
 </div>
 
-<div style="clear:both;"></div>
-<div>
+<div class="tab-root-container">
   <div *ngFor="let tab of tabService.tabs" [style.display]="tab == tabService.activeTab ? 'block' : 'none'" class="tab-container">
     <app-tab-content-container [tab]="tab"></app-tab-content-container>
   </div>

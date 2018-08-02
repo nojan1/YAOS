@@ -5,3 +5,9 @@ html, body {
 
   height: 100%;
 }
+
+.pane-group-relative {
+  position: relative;
+  display:flex;
+  flex:1 100%;
+}

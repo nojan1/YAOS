@@ -24,6 +24,7 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { TabComponent } from './components/tab/tab.component';
 import { TabContentContainer } from './components/tab/tab-content-container.component';
 import { CheckpointsComponent } from './components/checkpoints/checkpoints.component';
+import { CommandPaleteComponent } from './components/command-palete/command-palete.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +39,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SidemenuComponent,
     TabComponent,
     TabContentContainer,
-    CheckpointsComponent
+    CheckpointsComponent,
+    CommandPaleteComponent
   ],
   imports: [
     BrowserModule,
