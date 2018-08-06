@@ -1,7 +1,10 @@
 {
-  "PAGES": {
+  "TABS": {
+      "DEFAULT": {
+        "INSTRUCTIONS":"Press CTRL+ALT+P to open the command area <br />...or open tabs from the sidemenu to the left"
+      },
       "HOME": {
-          "TITLE": "App works !"
+        "TITLE": "App works !"
       }
   },
   "PALETE": {

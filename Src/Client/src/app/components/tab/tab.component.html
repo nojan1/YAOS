@@ -5,8 +5,19 @@
   </div>
 </div>
 
-<div class="tab-root-container">
-  <div *ngFor="let tab of tabService.tabs" [style.display]="tab == tabService.activeTab ? 'block' : 'none'" class="tab-container">
+<div class="tab-root-container" *ngIf="tabService.tabs.length; else noTabsPlaceholder">
+  <div *ngFor="let tab of tabService.tabs" 
+       [style.display]="tab == tabService.activeTab ? 'block' : 'none'" 
+       class="tab-container">
     <app-tab-content-container [tab]="tab"></app-tab-content-container>
   </div>
 </div>
+
+<ng-template #noTabsPlaceholder>
+  <div style="display:flex;height:100%;">
+    <div style="margin:auto;color:darkgray;text-align: center">
+      <h1 style="font-size:5em;margin-bottom:0;padding-bottom:0;font-weight:bold;">YAOS</h1>
+      <p style="font-size:2.5em;margin-top:0;padding-top:0;" [innerHTML]="'TABS.DEFAULT.INSTRUCTIONS' | translate:param"></p>
+    </div>
+  </div>
+</ng-template>

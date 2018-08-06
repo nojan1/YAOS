@@ -1,5 +1,8 @@
 {
-    "PAGES": {
+    "TABS": {
+        "DEFAULT": {
+            "INSTRUCTIONS": "Tryck CTRL+ALT+P för kommandofältet <br />...eller använd menyn till vänster"
+        },
         "HOME": {
             "TITLE": "App works !"
         }
@@ -10,5 +13,4 @@
     "COMMANDS": {
         "CHECKPOINTS_ADMIN": "Administrera kontroller"
     }
-  }
-  
+}
