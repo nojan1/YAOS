@@ -7,6 +7,8 @@
 /app-builds
 main.js
 
+src/WebClient.Generated.ts
+
 # dependencies
 /node_modules
 

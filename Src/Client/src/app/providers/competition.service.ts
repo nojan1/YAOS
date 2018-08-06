@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CompetitionClient } from '../../WebClient.Generated';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CompetitionService {
   get serverAddress() { return this._serverAddress; }
   get hasValidState() { return this._competitionId && this._serverAddress; }
 
-  constructor() { }
+  constructor(private competitionClient: CompetitionClient) {}
 
   public open(competitionId: number, serverAddress: string){
     // this._competitionId = competitionId;

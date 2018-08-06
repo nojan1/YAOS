@@ -30,6 +30,7 @@ import { TabCommandProviderService } from './providers/command-providers/tab-com
 import { CompetitionSelectionComponent } from './components/competition-selection/competition-selection.component';
 import { CompetitionService } from './providers/competition.service';
 import { GenericCommandProviderService } from './providers/command-providers/generic-command-provider.service';
+import { CompetitionClient } from '../WebClient.Generated';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -67,7 +68,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CompetitionService,
     CommandService,
     TabCommandProviderService,
-    GenericCommandProviderService
+    GenericCommandProviderService,
+    CompetitionClient
   ],
   bootstrap: [AppComponent],
   entryComponents: [CheckpointsComponent]
