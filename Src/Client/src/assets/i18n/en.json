@@ -1,16 +1,22 @@
 {
-  "TABS": {
-      "DEFAULT": {
-        "INSTRUCTIONS":"Press CTRL+ALT+P to open the command area <br />...or open tabs from the sidemenu to the left"
-      },
-      "HOME": {
-        "TITLE": "App works !"
-      }
-  },
-  "PALETE": {
-    "PLACEHOLDER_TEXT": "Command..."
-  },
-  "COMMANDS": {
-      "CHECKPOINTS_ADMIN": "Admin checkpoints"
-  }
+    "TABS": {
+        "DEFAULT": {
+            "INSTRUCTIONS": "Press CTRL+SHIFT+P to open the command area <br />...or open tabs from the sidemenu to the left"
+        },
+        "COMPETITION_SELECTION": {
+            "USE_LOCAL_SERVER": "Use local server",
+            "SERVER_ADDRESS": "Server",
+            "TABLE_HEADING_NAME": "Competition name"
+        },
+        "HOME": {
+            "TITLE": "App works !"
+        }
+    },
+    "PALETE": {
+        "PLACEHOLDER_TEXT": "Command..."
+    },
+    "COMMANDS": {
+        "CHECKPOINTS_ADMIN": "Admin checkpoints",
+        "COMPETITION_CLOSE": "Close competition"
+    }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TabService } from './tab.service';
 import { TabCommandProviderService } from './command-providers/tab-command-provider.service';
-import { ICommandProvider, CommandItem, IMatchedCommandBase, CommandType, IMatchedTabCommand } from './command-providers/common';
+import { ICommandProvider, CommandItem, IMatchedCommandBase, CommandType, IMatchedTabCommand, IMatchedGenericCommand } from './command-providers/common';
+import { GenericCommandProviderService } from './command-providers/generic-command-provider.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class CommandService {
 
   private providers : ICommandProvider[];
 
-  constructor(private tabService: TabService, private tabCommandProviderService: TabCommandProviderService) { 
-    this.providers = [tabCommandProviderService];
+  constructor(private tabService: TabService, private tabCommandProviderService: TabCommandProviderService, private genericCommandProviderService: GenericCommandProviderService) { 
+    this.providers = [tabCommandProviderService, genericCommandProviderService];
   }
 
   public match(query: string) : CommandItem[] {
@@ -25,7 +26,11 @@ export class CommandService {
           action: () => this.tabService.openTab(tabCommand.componentType)
         };
       }else{
-        throw new Error("Not implemented");
+        let genericCommand = x as IMatchedGenericCommand;
+        return {
+          title: genericCommand.title,
+          action: genericCommand.action
+        };
       }
     });
   }

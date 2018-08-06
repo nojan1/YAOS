@@ -1,4 +1,4 @@
-import { Type } from "../../../../node_modules/@angular/core";
+import { Type } from "@angular/core";
 import { TabbedComponent } from "../tab.service";
 
 export interface CommandItem {
@@ -23,4 +23,8 @@ export interface IMatchedCommandBase {
 
 export interface IMatchedTabCommand extends IMatchedCommandBase {
     componentType: Type<TabbedComponent>;
+}
+
+export interface IMatchedGenericCommand extends IMatchedCommandBase {
+    action: () => void;
 }

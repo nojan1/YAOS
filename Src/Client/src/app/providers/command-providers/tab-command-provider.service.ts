@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { TabbedComponent } from '../tab.service';
 import { CheckpointsComponent } from '../../components/checkpoints/checkpoints.component';
-import { TranslateService } from '../../../../node_modules/@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { IMatchedTabCommand, ICommandProvider, CommandType } from './common';
 
 interface TabSpecification {

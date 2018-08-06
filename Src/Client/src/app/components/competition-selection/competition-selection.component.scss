@@ -1,0 +1,28 @@
+.container-frame {
+    width:700px;
+    margin:auto;
+    border:1px solid rgba($color: (#aaaaaa), $alpha: 0.8);
+    height: 500px;
+
+    .title {
+        font-size:3em;
+        color:darkgrey;
+        font-weight: bold;
+        text-align:center;
+    }
+
+    .controls{
+        padding:10px;
+    }
+
+    hr {
+        margin:0 0 5px 0;
+        padding:0;
+    }
+
+    tbody{
+        tr {
+            cursor: pointer;
+        }
+    }
+}

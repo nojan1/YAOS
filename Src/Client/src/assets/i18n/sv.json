@@ -1,7 +1,12 @@
 {
     "TABS": {
         "DEFAULT": {
-            "INSTRUCTIONS": "Tryck CTRL+ALT+P för kommandofältet <br />...eller använd menyn till vänster"
+            "INSTRUCTIONS": "Tryck CTRL+SHIFT+P för kommandofältet <br />...eller använd menyn till vänster"
+        },
+        "COMPETITION_SELECTION" : {
+            "USE_LOCAL_SERVER": "Använd lokal server",
+            "SERVER_ADDRESS": "Server",
+            "TABLE_HEADING_NAME": "Tävling"
         },
         "HOME": {
             "TITLE": "App works !"
@@ -11,6 +16,7 @@
         "PLACEHOLDER_TEXT": "Kommando..."
     },
     "COMMANDS": {
-        "CHECKPOINTS_ADMIN": "Administrera kontroller"
+        "CHECKPOINTS_ADMIN": "Administrera kontroller",
+        "COMPETITION_CLOSE": "Stäng tävling"
     }
 }
