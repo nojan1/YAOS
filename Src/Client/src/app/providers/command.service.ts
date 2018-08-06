@@ -1,51 +1,7 @@
-import { Type, Injectable } from '@angular/core';
-import { TabService, TabbedComponent } from './tab.service';
-import { CheckpointsComponent } from '../components/checkpoints/checkpoints.component';
-
-export interface CommandItem {
-  title: string;
-  action: () => void;
-}
-
-interface ICommandProvider {
-  init(): void;
-  match(query: string): IMatchedCommandBase[];
-}
-
-enum CommandType {
-  Tab,
-  Command
-}
-
-interface IMatchedCommandBase {
-  title: string;
-  type: CommandType;
-}
-
-interface IMatchedTabCommand extends IMatchedCommandBase{
-  componentType: Type<TabbedComponent>;
-}
-
-class TabCommandProvider implements ICommandProvider{
-  init(): void {
-    
-  }  
-  
-  match(query: string): IMatchedTabCommand[] {
-    let matches = [];
-    
-    if("Administrera kontroller".indexOf(query) != -1){
-      matches.push({
-        title: "Administrera kontroller",
-        type: CommandType.Tab,
-        componentType: CheckpointsComponent
-      });
-    }
-
-    return matches;
-  }
-
-}
+import { Injectable } from '@angular/core';
+import { TabService } from './tab.service';
+import { TabCommandProviderService } from './command-providers/tab-command-provider.service';
+import { ICommandProvider, CommandItem, IMatchedCommandBase, CommandType, IMatchedTabCommand } from './command-providers/common';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +10,8 @@ export class CommandService {
 
   private providers : ICommandProvider[];
 
-  constructor(private tabService: TabService) { 
-    this.providers = [new TabCommandProvider()];
+  constructor(private tabService: TabService, private tabCommandProviderService: TabCommandProviderService) { 
+    this.providers = [tabCommandProviderService];
   }
 
   public match(query: string) : CommandItem[] {

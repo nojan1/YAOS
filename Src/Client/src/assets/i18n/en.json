@@ -3,5 +3,11 @@
       "HOME": {
           "TITLE": "App works !"
       }
+  },
+  "PALETE": {
+    "PLACEHOLDER_TEXT": "Command..."
+  },
+  "COMMANDS": {
+      "CHECKPOINTS_ADMIN": "Admin checkpoints"
   }
 }

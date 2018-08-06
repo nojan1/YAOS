@@ -26,6 +26,7 @@ import { TabComponent } from './components/tab/tab.component';
 import { TabContentContainer } from './components/tab/tab-content-container.component';
 import { CheckpointsComponent } from './components/checkpoints/checkpoints.component';
 import { CommandPaleteComponent } from './components/command-palete/command-palete.component';
+import { TabCommandProviderService } from './providers/command-providers/tab-command-provider.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -56,7 +57,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ElectronService, TabService, CommandService],
+  providers: [
+    ElectronService,
+    TabService,
+    CommandService,
+    TabCommandProviderService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [CheckpointsComponent]
 })

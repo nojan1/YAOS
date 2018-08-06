@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommandItem, CommandService } from '../../providers/command.service';
-import { Command } from '../../../../node_modules/@types/selenium-webdriver';
-
-
+import {CommandService } from '../../providers/command.service';
+import { CommandItem } from '../../providers/command-providers/common';
 
 @Component({
   selector: 'app-command-palete',

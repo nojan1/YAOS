@@ -1,0 +1,14 @@
+{
+    "PAGES": {
+        "HOME": {
+            "TITLE": "App works !"
+        }
+    },
+    "PALETE": {
+        "PLACEHOLDER_TEXT": "Kommando..."
+    },
+    "COMMANDS": {
+        "CHECKPOINTS_ADMIN": "Administrera kontroller"
+    }
+  }
+  
