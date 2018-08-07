@@ -6,7 +6,10 @@
         "COMPETITION_SELECTION": {
             "USE_LOCAL_SERVER": "Use local server",
             "SERVER_ADDRESS": "Server",
-            "TABLE_HEADING_NAME": "Competition name"
+            "TABLE_HEADING_NAME": "Competition name",
+            "VALIDATION_FAIL": "Unable to connect to server",
+            "VALIDATION_WRONGVERSION": "Server is running the wrong software version",
+            "VALIDATION_SUCCESS": "Connected to server"
         },
         "HOME": {
             "TITLE": "App works !"

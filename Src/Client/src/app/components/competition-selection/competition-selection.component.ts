@@ -12,6 +12,7 @@ export class CompetitionSelectionComponent implements OnInit {
 
   public competitions: WebClient.Competition[] = [];
 
+  public lastValidationResult: ServerValidationResult;
   public useLocalServer: boolean = true;
   public serverAddress: string = "";
 
@@ -21,22 +22,28 @@ export class CompetitionSelectionComponent implements OnInit {
     this.getCompetitions(LOCAL_SERVER_ADDRESS);
   }
 
-  public loadCompetition(competition: WebClient.Competition){
+  public submitServer() {
+    this.getCompetitions(this.serverAddress);
+  }
+
+  public loadCompetition(competition: WebClient.Competition) {
     this.serverStateService.setCompetitionId(competition.id);
     this.router.navigateByUrl("/app");
   }
 
-  private getCompetitions(serverAddress: string){
+  private getCompetitions(serverAddress: string) {
+    this.competitions = [];
+
     this.serverStateService.setServer(serverAddress)
       .then(result => {
-        if(result == ServerValidationResult.Success){
+        if (result == ServerValidationResult.Success) {
           this.competitionClient.get()
             .subscribe(x => {
               this.competitions = x;
             });
-        }else{
-          alert(result); //TODO: Remove alert
         }
+
+        this.lastValidationResult = result;
       });
   }
 }

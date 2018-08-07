@@ -6,7 +6,10 @@
         "COMPETITION_SELECTION" : {
             "USE_LOCAL_SERVER": "Använd lokal server",
             "SERVER_ADDRESS": "Server",
-            "TABLE_HEADING_NAME": "Tävling"
+            "TABLE_HEADING_NAME": "Tävling",
+            "VALIDATION_FAIL": "Kunde inte ansluta till servern",
+            "VALIDATION_WRONGVERSION": "Servern kör fel version",
+            "VALIDATION_SUCCESS": "Ansluten till servern"
         },
         "HOME": {
             "TITLE": "App works !"

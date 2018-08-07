@@ -20,9 +20,32 @@
         padding:0;
     }
 
-    tbody{
-        tr {
-            cursor: pointer;
+    table{
+        overflow-y: scroll;
+
+        tbody{
+            tr {
+                cursor: pointer;
+            }
         }
     }
+}
+
+.validationResultContainer {
+    position: relative;
+    bottom:0;
+    padding:5px;
+    margin-bottom: 0;
+    margin-left:5px;
+    margin-right:5px;
+    border:1px solid darkgrey;
+    color:white;
+}
+
+.validationResultContainer.success {
+    background-color: green;
+}
+
+.validationResultContainer.error {
+    background-color: red;
 }

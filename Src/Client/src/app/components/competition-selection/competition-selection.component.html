@@ -4,16 +4,23 @@
       <div class="title">YAOS</div>
 
       <div class="controls">
-        <form>
+        <form (ngSubmit)="submitServer()" #serverForm="ngForm">
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="useLocalServer" [ngModelOptions]="{standalone: true}" [(ngModel)]="useLocalServer"> {{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}}
+              <input type="checkbox" name="useLocalServer" [(ngModel)]="useLocalServer"> {{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}}
             </label>
           </div>
 
-          <div class="form-group" *ngIf="!useLocalServer">
+          <div class="form-group" [hidden]="useLocalServer">
             <label>{{'TABS.COMPETITION_SELECTION.SERVER_ADDRESS' | translate:param}}</label>
-            <input type="text" class="form-control" placeholder="Host:Port" [(ngModel)]="serverAddress">
+            <div class="btn-group">
+              <input type="text" class="form-control" placeholder="Host:Port" [(ngModel)]="serverAddress" name="_serverAddress" required
+                pattern=".*:\d*">
+
+              <button type="submit" class="btn btn-default" [disabled]="!serverForm.form.valid">
+                <span class="icon icon-install"></span>
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -22,7 +29,7 @@
         <thead>
           <tr>
             <th>
-                {{'TABS.COMPETITION_SELECTION.TABLE_HEADING_NAME' | translate:param}}
+              {{'TABS.COMPETITION_SELECTION.TABLE_HEADING_NAME' | translate:param}}
             </th>
           </tr>
         </thead>
@@ -35,6 +42,17 @@
         </tbody>
       </table>
 
+      <div class="validationResultContainer" *ngIf="lastValidationResult" [class.success]="lastValidationResult == 2" [class.error]="lastValidationResult != 2">
+        <span *ngIf="lastValidationResult == 0">
+            {{'TABS.COMPETITION_SELECTION.VALIDATION_FAIL' | translate:param}}
+        </span>
+        <span *ngIf="lastValidationResult == 1">
+            {{'TABS.COMPETITION_SELECTION.VALIDATION_WRONGVERSION"' | translate:param}}
+        </span>
+        <span *ngIf="lastValidationResult == 2">
+            {{'TABS.COMPETITION_SELECTION.VALIDATION_SUCCESS' | translate:param}}
+        </span>
+      </div>
     </div>
   </div>
 </div>
