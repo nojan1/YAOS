@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ICommandProvider, IMatchedGenericCommand, CommandType } from './common';
-import { TranslateService } from '../../../../node_modules/@ngx-translate/core';
-import { CompetitionService } from '../competition.service';
-import { Router } from '../../../../node_modules/@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ServerStateService } from '../server-state.service';
+import { Router } from '@angular/router';
 
 interface CommandSpecification {
   translateKey: string,
@@ -16,11 +16,11 @@ export class GenericCommandProviderService implements ICommandProvider {
 
   private knownCommands : IMatchedGenericCommand[] = [];
 
-  constructor(translate: TranslateService, private competitionService: CompetitionService, private router: Router) { 
+  constructor(translate: TranslateService, private serverStateService: ServerStateService, private router: Router) { 
     let commandSpecifications = [
       {
         translateKey: "COMMANDS.COMPETITION_CLOSE",
-        action: () => { competitionService.close(); router.navigateByUrl("/"); }
+        action: () => { serverStateService.close(); router.navigateByUrl("/"); }
       }
     ] as CommandSpecification[];
 

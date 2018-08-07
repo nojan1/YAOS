@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CompetitionService } from '../../providers/competition.service';
+import { ServerStateService, ServerValidationResult, LOCAL_SERVER_ADDRESS } from '../../providers/server-state.service';
 import { Router } from '@angular/router';
+import { WebClient } from '../../../WebClient.Generated';
 
 @Component({
   selector: 'app-competition-selection',
@@ -9,16 +10,33 @@ import { Router } from '@angular/router';
 })
 export class CompetitionSelectionComponent implements OnInit {
 
+  public competitions: WebClient.Competition[] = [];
+
   public useLocalServer: boolean = true;
   public serverAddress: string = "";
 
-  constructor(private competitionService: CompetitionService, private router: Router) { }
+  constructor(private serverStateService: ServerStateService, private competitionClient: WebClient.CompetitionClient, private router: Router) { }
 
   ngOnInit() {
+    this.getCompetitions(LOCAL_SERVER_ADDRESS);
   }
 
-  public loadCompetition(){
-    this.competitionService.open(1, "");
+  public loadCompetition(competition: WebClient.Competition){
+    this.serverStateService.setCompetitionId(competition.id);
     this.router.navigateByUrl("/app");
+  }
+
+  private getCompetitions(serverAddress: string){
+    this.serverStateService.setServer(serverAddress)
+      .then(result => {
+        if(result == ServerValidationResult.Success){
+          this.competitionClient.get()
+            .subscribe(x => {
+              this.competitions = x;
+            });
+        }else{
+          alert(result); //TODO: Remove alert
+        }
+      });
   }
 }

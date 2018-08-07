@@ -7,7 +7,7 @@
         <form>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="useLocalServer" [(ngModel)]="useLocalServer"> {{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}}
+              <input type="checkbox" name="useLocalServer" [ngModelOptions]="{standalone: true}" [(ngModel)]="useLocalServer"> {{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}}
             </label>
           </div>
 
@@ -27,9 +27,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr (click)="loadCompetition()">
+          <tr *ngFor="let competition of competitions" (click)="loadCompetition(competition)">
             <td>
-              Test
+              {{competition.name}}
             </td>
           </tr>
         </tbody>

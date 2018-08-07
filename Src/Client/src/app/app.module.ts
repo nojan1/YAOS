@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -28,9 +28,11 @@ import { CheckpointsComponent } from './components/checkpoints/checkpoints.compo
 import { CommandPaleteComponent } from './components/command-palete/command-palete.component';
 import { TabCommandProviderService } from './providers/command-providers/tab-command-provider.service';
 import { CompetitionSelectionComponent } from './components/competition-selection/competition-selection.component';
-import { CompetitionService } from './providers/competition.service';
+import { ServerStateService } from './providers/server-state.service';
 import { GenericCommandProviderService } from './providers/command-providers/generic-command-provider.service';
-import { CompetitionClient } from '../WebClient.Generated';
+import { HosturlInterceptorService } from './providers/hosturl-interceptor.service';
+import { WebClient } from '../WebClient.Generated';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -63,15 +65,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HosturlInterceptorService, multi: true },
+    WebClient.CompetitionClient,
     ElectronService,
     TabService,
-    CompetitionService,
+    ServerStateService,
     CommandService,
     TabCommandProviderService,
-    GenericCommandProviderService,
-    CompetitionClient
+    GenericCommandProviderService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CheckpointsComponent]
+  entryComponents: [
+    CheckpointsComponent
+  ]
 })
 export class AppModule { }

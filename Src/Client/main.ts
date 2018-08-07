@@ -2,9 +2,10 @@ import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
-let win, serve;
+let win, serve, noLocalServer;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
+noLocalServer = args.some(val => val === '--no-local-server');
 
 function createWindow() {
   const electronScreen = screen;
