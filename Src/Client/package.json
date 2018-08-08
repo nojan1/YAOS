@@ -36,7 +36,9 @@
     "test": "npm run postinstall:web && ng test",
     "e2e": "npm run postinstall:web && ng e2e"
   },
-  "dependencies": {},
+  "dependencies": {
+    "serialport": "^6.2.2"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.3",
     "@angular/cli": "6.0.5",
@@ -55,6 +57,7 @@
     "@types/jasmine": "2.8.7",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "8.9.4",
+    "@types/serialport": "^6.0.4",
     "codelyzer": "4.2.1",
     "core-js": "2.5.6",
     "electron": "2.0.3",

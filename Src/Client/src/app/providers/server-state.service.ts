@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebClient } from '../../WebClient.Generated';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 export const LOCAL_SERVER_ADDRESS = "localhost:5001";
 export const EXPECTED_SERVER_VERSION = "0.0.1";
