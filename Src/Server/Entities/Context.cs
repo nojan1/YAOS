@@ -18,6 +18,9 @@ namespace Server.Entities
         public DbSet<Stage> Stages { get; set; }
         public DbSet<Punch> Punches { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<Map> Maps { get; set; }
+        public DbSet<Checkpoint> Checkpoints { get; set; }
         public DbSet<Badge> Badges { get; set; }
+        public DbSet<Runner> Runners { get; set; }
     }
 }
