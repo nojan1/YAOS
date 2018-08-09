@@ -10,7 +10,7 @@ import { WebClient } from '../../../WebClient.Generated';
 })
 export class CompetitionSelectionComponent implements OnInit {
 
-  public competitions: WebClient.Competition[] = [];
+  public competitions: WebClient.CompetitionModel[] = [];
 
   public lastValidationResult: ServerValidationResult;
   public useLocalServer: boolean = true;
@@ -26,7 +26,7 @@ export class CompetitionSelectionComponent implements OnInit {
     this.getCompetitions(this.serverAddress);
   }
 
-  public loadCompetition(competition: WebClient.Competition) {
+  public loadCompetition(competition: WebClient.CompetitionModel) {
     this.serverStateService.setCompetitionId(competition.id);
     this.router.navigateByUrl("/app");
   }

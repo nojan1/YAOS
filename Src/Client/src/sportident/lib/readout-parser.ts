@@ -56,10 +56,10 @@ export class Readout extends Transform {
                         this.badgeReader = null;
                     }
                 }else{
-                    
+                    //Got probable SICard data message without a badgeReader defined... the station is not playing nice
                 }
             } else if (this.station.protocolMode.autoSendOut) {
-
+                
             } else {
                 throw new Error("Station is not set with any valid readout modes");
             }

@@ -42,14 +42,14 @@
         </tbody>
       </table>
 
-      <div class="validationResultContainer" *ngIf="lastValidationResult" [class.success]="lastValidationResult == 2" [class.error]="lastValidationResult != 2">
-        <span *ngIf="lastValidationResult == 0">
+      <div class="validationResultContainer" *ngIf="lastValidationResult" [class.success]="lastValidationResult == 3" [class.error]="lastValidationResult != 3">
+        <span *ngIf="lastValidationResult == 1">
             {{'TABS.COMPETITION_SELECTION.VALIDATION_FAIL' | translate:param}}
         </span>
-        <span *ngIf="lastValidationResult == 1">
+        <span *ngIf="lastValidationResult == 2">
             {{'TABS.COMPETITION_SELECTION.VALIDATION_WRONGVERSION"' | translate:param}}
         </span>
-        <span *ngIf="lastValidationResult == 2">
+        <span *ngIf="lastValidationResult == 3">
             {{'TABS.COMPETITION_SELECTION.VALIDATION_SUCCESS' | translate:param}}
         </span>
       </div>

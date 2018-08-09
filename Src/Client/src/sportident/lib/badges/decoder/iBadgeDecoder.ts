@@ -4,6 +4,9 @@ export interface Punch {
 }
 
 export interface IBadgeDecoder {
+    readonly startTime: Date,
+    readonly finishTime: Date,
+    readonly checkTime: Date,
     readonly punches : Punch[];
     readonly badgeNumber: string;
     parse(data: Buffer);

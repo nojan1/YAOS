@@ -6,9 +6,9 @@ export const LOCAL_SERVER_ADDRESS = "localhost:5001";
 export const EXPECTED_SERVER_VERSION = "0.0.1";
 
 export enum ServerValidationResult {
-  ConnectionFailed,
-  WrongVersion,
-  Success
+  ConnectionFailed = 1,
+  WrongVersion = 2,
+  Success = 3
 }
 
 @Injectable({
