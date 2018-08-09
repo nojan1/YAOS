@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.Entities;
 using Server.Models;
 
 namespace Server.Controllers
@@ -12,17 +13,23 @@ namespace Server.Controllers
     [ApiController]
     public class CompetitionController : ControllerBase
     {
-        [Produces(typeof(IEnumerable<Competition>))]
+        private readonly Context _context;
+
+        public CompetitionController(Context context)
+        {
+            _context = context;
+        }
+
+        [Produces(typeof(IEnumerable<CompetitionModel>))]
         [HttpGet("")]
         public IActionResult Get()
         {
-            return Ok(new Competition[]
-            {
-                new Competition {
-                    Id = 1,
-                    Name = "Test"
-                }
-            });
+            return Ok(_context.Competitions
+                .Select(x => new CompetitionModel
+                {
+                    Id = x.ID,
+                    Name = x.Name
+                }).ToList());
         }
     }
 }
