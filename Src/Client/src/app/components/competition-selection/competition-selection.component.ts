@@ -19,7 +19,14 @@ export class CompetitionSelectionComponent implements OnInit {
   constructor(private serverStateService: ServerStateService, private competitionClient: WebClient.CompetitionClient, private router: Router) { }
 
   ngOnInit() {
-    this.getCompetitions(LOCAL_SERVER_ADDRESS);
+    this.useLocalServerChanged();
+  }
+
+  public useLocalServerChanged() {
+    if (this.useLocalServer) {
+      this.lastValidationResult = null;
+      this.getCompetitions(LOCAL_SERVER_ADDRESS);
+    }
   }
 
   public submitServer() {

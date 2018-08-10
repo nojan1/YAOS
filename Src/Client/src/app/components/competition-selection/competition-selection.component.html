@@ -7,7 +7,7 @@
         <form (ngSubmit)="submitServer()" #serverForm="ngForm">
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="useLocalServer" [(ngModel)]="useLocalServer"> {{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}}
+              <input type="checkbox" name="useLocalServer" [(ngModel)]="useLocalServer" (ngModelChange)="useLocalServerChanged()"> {{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}}
             </label>
           </div>
 
