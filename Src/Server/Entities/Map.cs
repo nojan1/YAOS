@@ -19,5 +19,6 @@ namespace Server.Entities
         public int StageID { get; set; }
 
         public ICollection<OrderedCheckpoint> Checkpoints { get; set; }
+        public Stage Stage { get; set; }
     }
 }

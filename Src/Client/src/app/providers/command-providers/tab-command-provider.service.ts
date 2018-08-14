@@ -3,6 +3,8 @@ import { TabbedComponent } from '../tab.service';
 import { CheckpointsComponent } from '../../components/checkpoints/checkpoints.component';
 import { TranslateService } from '@ngx-translate/core';
 import { IMatchedTabCommand, ICommandProvider, CommandType } from './common';
+import { ClassesComponent } from '../../components/classes/classes.component';
+import { MapsComponent } from '../../components/maps/maps.component';
 
 interface TabSpecification {
   translateKey: string,
@@ -21,6 +23,14 @@ export class TabCommandProviderService implements ICommandProvider {
       {
         translateKey: 'COMMANDS.CHECKPOINTS_ADMIN',
         componentType: CheckpointsComponent
+      },
+      {
+        translateKey: 'COMMANDS.MAPS_ADMIN',
+        componentType: MapsComponent
+      },
+      {
+        translateKey: 'COMMANDS.CLASSES_ADMIN',
+        componentType: ClassesComponent
       }
     ] as TabSpecification[];
 

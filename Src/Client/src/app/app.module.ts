@@ -26,6 +26,9 @@ import { TabComponent } from './components/tab/tab.component';
 import { TabContentContainer } from './components/tab/tab-content-container.component';
 import { CheckpointsComponent } from './components/checkpoints/checkpoints.component';
 import { CommandPaleteComponent } from './components/command-palete/command-palete.component';
+import { MapsComponent } from './components/maps/maps.component';
+import { ClassesComponent } from './components/classes/classes.component';
+
 import { TabCommandProviderService } from './providers/command-providers/tab-command-provider.service';
 import { CompetitionSelectionComponent } from './components/competition-selection/competition-selection.component';
 import { ServerStateService } from './providers/server-state.service';
@@ -49,7 +52,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TabContentContainer,
     CheckpointsComponent,
     CommandPaleteComponent,
-    CompetitionSelectionComponent
+    CompetitionSelectionComponent,
+    MapsComponent,
+    ClassesComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HosturlInterceptorService, multi: true },
     WebClient.CompetitionClient,
+    WebClient.CheckpointClient,
+    WebClient.ClassClient,
     ElectronService,
     TabService,
     ServerStateService,
@@ -76,7 +83,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    CheckpointsComponent
+    CheckpointsComponent,
+    ClassesComponent,
+    MapsComponent
   ]
 })
 export class AppModule { }

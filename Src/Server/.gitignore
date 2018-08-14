@@ -276,3 +276,5 @@ __pycache__/
 # End of https://www.gitignore.io/api/aspnetcore
 
 mydb.db
+mydb.db-journal
+test-data.sql

@@ -1,9 +1,9 @@
-import { Type } from "@angular/core";
+import { Type, Injector } from "@angular/core";
 import { TabbedComponent } from "../tab.service";
 
 export interface CommandItem {
     title: string;
-    action: () => void;
+    action: (injector: Injector) => void;
 }
 
 export interface ICommandProvider {
@@ -26,5 +26,5 @@ export interface IMatchedTabCommand extends IMatchedCommandBase {
 }
 
 export interface IMatchedGenericCommand extends IMatchedCommandBase {
-    action: () => void;
+    action: (injector: Injector) => void;
 }

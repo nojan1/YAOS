@@ -12,11 +12,18 @@ namespace Server.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StageID = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Badges", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Badges_Stages_StageID",
+                        column: x => x.StageID,
+                        principalTable: "Stages",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

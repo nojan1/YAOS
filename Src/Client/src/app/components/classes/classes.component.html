@@ -1,0 +1,68 @@
+<div class="pane-group-relative">
+  <div class="pane">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>{{'TABS.CLASSES.NAME' | translate:param}}</th>
+          <th>{{'TABS.MAPS.NAME' | translate:param}}</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let class of items">
+        <tr (click)="edit(class)">
+          <td>
+            {{class.name}}
+          </td>
+          <td>
+            [banans namn]
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pane">
+
+    <div class="well">
+      <form #classForm="ngForm">
+        <button class="btn btn-default pull-left" (click)="createNew()" [disabled]="!classForm.form.valid" *ngIf="inEditMode">
+          <span class="icon icon-upload"></span>&nbsp;
+          {{'TABS.CLASSES.SAVE' | translate:param}}
+        </button>
+
+        <button class="btn btn-default pull-right" (click)="createNew()">
+          <span class="icon icon-plus"></span>
+          {{'TABS.CLASSES.ADD' | translate:param}}
+        </button>
+
+        <div class="clearfix"></div>
+
+        <div *ngIf="workingCopy" style="margin-top:5px;">
+          <div class="form-group">
+            <label>{{'TABS.CLASSES.NAME' | translate:param}}</label>
+            <input type="text" name="className" class="form-control" [(ngModel)]="workingCopy.name" />
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" [(ngModel)]="workingCopy.allowBadgeStart" name="allowBadgeStart"> {{'TABS.CLASSES.ALLOW_BADGE_START' | translate:param}}
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>{{'TABS.CLASSES.VACANCY_PERCENTAGE' | translate:param}}</label>
+            <input type="number" class="form-control" [(ngModel)]="workingCopy.vacancyPercentage" name="vacancyPercentage">
+          </div>
+
+          <div class="form-group-box">
+            <input type="checkbox" [(ngModel)]="workingCopy.hasStartTime" name="hasStartTime"> {{'TABS.CLASSES.HAS_START_TIME' | translate:param}}
+            <div class="form-group-box-inner" [hidden]="!workingCopy.hasStartTime">
+              <div class="form-group">
+                <label>{{'TABS.CLASSES.START_TIME_SPACING' | translate:param}}</label>
+                <input type="number" class="form-control" name="timeSpacing" [(ngModel)]="workingCopy.timeSpacing">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,22 +1,35 @@
-
 <div class="pane-group-relative">
   <div class="pane">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th>Kodsiffra</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              200
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>{{'TABS.CHECKPOINTS.CODE' | translate:param}}</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let checkpoint of items">
+        <tr (click)="edit(checkpoint, true)">
+          <td>
+            {{checkpoint.code}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="pane">
-    
+   
+    <div class="well">
+        <button class="btn btn-default pull-right" (click)="createNew()">
+            <span class="icon icon-plus"></span>
+            {{'TABS.CHECKPOINTS.ADD' | translate:param}}
+        </button>
+      <div class="clearfix"></div>
+      <form *ngIf="workingCopy">
+        <div class="form-group">
+          <label>{{'TABS.CHECKPOINTS.CODE' | translate:param}}</label>
+          <input type="number" name="code" class="form-control" [(ngModel)]="workingCopy.code" *ngIf="isNew"/>
+          <label *ngIf="!isNew">{{workingCopy.code}}</label>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

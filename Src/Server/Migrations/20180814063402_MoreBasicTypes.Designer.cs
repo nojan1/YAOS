@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Entities;
 
 namespace Server.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180814063402_MoreBasicTypes")]
+    partial class MoreBasicTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,17 +53,9 @@ namespace Server.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("AllowBadgeStart");
-
-                    b.Property<bool>("HasStartTime");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("StageID");
-
-                    b.Property<int>("TimeSpacing");
-
-                    b.Property<int>("VacancyPercentage");
 
                     b.HasKey("ID");
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import {CommandService } from '../../providers/command.service';
 import { CommandItem } from '../../providers/command-providers/common';
 
@@ -13,7 +13,7 @@ export class CommandPaleteComponent implements OnInit {
   commandItems: CommandItem[] = [];
   activeCommandItem: CommandItem;
 
-  constructor(private commandService: CommandService) { }
+  constructor(private commandService: CommandService, private injector: Injector) { }
 
   ngOnInit() {
 
@@ -50,7 +50,7 @@ export class CommandPaleteComponent implements OnInit {
   }
 
   selectCommandItem(commandItem: CommandItem){
-    commandItem.action();
+    commandItem.action(this.injector);
     this.closeOutput();
   }
 

@@ -8,5 +8,7 @@ namespace Server.Entities
         public int BadgeID { get; set; }
         public int StationCode { get; set; }
         public DateTime Timestamp { get; set; }
+
+        public Badge Badge { get; set; }
     }
 }

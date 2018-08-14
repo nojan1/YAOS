@@ -1,0 +1,37 @@
+<div class="pane-group-relative">
+  <div class="pane">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>{{'TABS.MAPS.NAME' | translate:param}}</th>
+          <th>{{'TABS.MAPS.NUM_CHECKPOINTS' | translate:param}}</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let map of items">
+        <tr (click)="edit(map)">
+          <td>
+            {{map.name}}
+          </td>
+          <td>
+            {{map.checkpoints ? map.checkpoints.length : 0}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pane">
+    <div class="well">
+      <button class="btn btn-default pull-right" (click)="createNew()">
+        <span class="icon icon-plus"></span>
+        {{'TABS.MAPS.ADD' | translate:param}}
+      </button>
+      <div class="clearfix"></div>
+      <form *ngIf="workingCopy">
+        <div class="form-group">
+          <label>{{'TABS.MAPS.NAME' | translate:param}}</label>
+          <input type="text" name="mapName" class="form-control" [(ngModel)]="workingCopy.name" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

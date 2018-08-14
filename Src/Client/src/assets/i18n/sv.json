@@ -11,8 +11,27 @@
             "VALIDATION_WRONGVERSION": "Servern kör fel version",
             "VALIDATION_SUCCESS": "Ansluten till servern"
         },
+        "CHECKPOINTS": {
+            "CODE": "Kodsiffra",
+            "ADD": "Lägg till"
+        },
         "HOME": {
-            "TITLE": "App works !"
+            "TITLE": "Appen funkar!"
+        },
+        "MAPS": {
+            "NAME": "Banans namn",
+            "NUM_CHECKPOINTS": "Antal kontroller",
+            "ADD": "Lägg till"
+        },
+        "CLASSES": {
+            "NAME": "Klassens namn",
+            "ADD": "Lägg till",
+            "SAVE": "Spara (Ctrl+s)",
+            "HAS_START_TIME": "Använd starttid",
+            "ALLOW_BADGE_START": "Tillåt brickstart",
+            "START_TIME_SPACING": "Tidsförskjutning (minuter)",
+            "VACANCY_PERCENTAGE": "Vakanser (procent)",
+            "MAP": "Karta"
         }
     },
     "PALETE": {
@@ -20,6 +39,8 @@
     },
     "COMMANDS": {
         "CHECKPOINTS_ADMIN": "Administrera kontroller",
+        "MAPS_ADMIN": "Administrera banor",
+        "CLASSES_ADMIN": "Administrera klasser",
         "COMPETITION_CLOSE": "Stäng tävling"
     }
 }

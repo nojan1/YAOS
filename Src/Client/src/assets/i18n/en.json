@@ -11,8 +11,27 @@
             "VALIDATION_WRONGVERSION": "Server is running the wrong software version",
             "VALIDATION_SUCCESS": "Connected to server"
         },
+        "CHECKPOINTS": {
+            "CODE": "Station code",
+            "ADD": "Add new"
+        },
         "HOME": {
             "TITLE": "App works !"
+        },
+        "MAPS": {
+            "NAME": "Map name",
+            "NUM_CHECKPOINTS": "Number of checkpoints",
+            "ADD": "Add new"
+        },
+        "CLASSES": {
+            "NAME": "Class name",
+            "ADD": "Add new",
+            "SAVE": "Save (Ctrl+s)",
+            "HAS_START_TIME": "Use start time",
+            "ALLOW_BADGE_START": "Allow badge start",
+            "START_TIME_SPACING": "Time spread for start times (minutes)",
+            "VACANCY_PERCENTAGE": "Vacancy percentage",
+            "MAP": "Map"
         }
     },
     "PALETE": {
@@ -20,6 +39,8 @@
     },
     "COMMANDS": {
         "CHECKPOINTS_ADMIN": "Admin checkpoints",
+        "MAPS_ADMIN": "Admin maps",
+        "CLASSES_ADMIN": "Admin classes",
         "COMPETITION_CLOSE": "Close competition"
     }
 }

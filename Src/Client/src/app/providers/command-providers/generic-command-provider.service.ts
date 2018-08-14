@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ICommandProvider, IMatchedGenericCommand, CommandType } from './common';
 import { TranslateService } from '@ngx-translate/core';
 import { ServerStateService } from '../server-state.service';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 interface CommandSpecification {
   translateKey: string,
-  action: () => void
+  action: (injector: Injector) => void
 }
 
 @Injectable({
@@ -20,7 +20,7 @@ export class GenericCommandProviderService implements ICommandProvider {
     let commandSpecifications = [
       {
         translateKey: "COMMANDS.COMPETITION_CLOSE",
-        action: () => { serverStateService.close(); router.navigateByUrl("/"); }
+        action: (x) => { serverStateService.close(); router.navigateByUrl("/"); }
       }
     ] as CommandSpecification[];
 

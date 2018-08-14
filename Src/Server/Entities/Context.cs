@@ -22,5 +22,6 @@ namespace Server.Entities
         public DbSet<Checkpoint> Checkpoints { get; set; }
         public DbSet<Badge> Badges { get; set; }
         public DbSet<Runner> Runners { get; set; }
+        public DbSet<StartSlot> StartSlots { get; set; }
     }
 }
