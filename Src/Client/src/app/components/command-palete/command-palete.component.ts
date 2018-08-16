@@ -59,13 +59,14 @@ export class CommandPaleteComponent implements OnInit {
 
   selectCommandItem(commandItem: CommandItem){
     commandItem.action(this.injector);
-    
     this.paleteInputField.nativeElement.value = "";
-    this.paleteInputField.nativeElement.blur();
+    
     this.closeOutput();
   }
 
   closeOutput() {
+    
+    this.paleteInputField.nativeElement.blur();
     this.activeCommandItem = null;
     this.outputOpen = false;
   }

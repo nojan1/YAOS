@@ -28,6 +28,10 @@ import { CheckpointsComponent } from './components/checkpoints/checkpoints.compo
 import { CommandPaleteComponent } from './components/command-palete/command-palete.component';
 import { MapsComponent } from './components/maps/maps.component';
 import { ClassesComponent } from './components/classes/classes.component';
+import { RunnersComponent } from './components/runners/runners.component';
+import { RunnerDetailsComponent } from './components/runner-details/runner-details.component';
+import { BadgeReadoutComponent } from './components/badge-readout/badge-readout.component';
+import { DirectEntryComponent } from './components/direct-entry/direct-entry.component';
 
 import { TabCommandProviderService } from './providers/command-providers/tab-command-provider.service';
 import { CompetitionSelectionComponent } from './components/competition-selection/competition-selection.component';
@@ -35,7 +39,6 @@ import { ServerStateService } from './providers/server-state.service';
 import { GenericCommandProviderService } from './providers/command-providers/generic-command-provider.service';
 import { HosturlInterceptorService } from './providers/hosturl-interceptor.service';
 import { WebClient } from '../WebClient.Generated';
-
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +57,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommandPaleteComponent,
     CompetitionSelectionComponent,
     MapsComponent,
-    ClassesComponent
+    ClassesComponent,
+    RunnersComponent,
+    RunnerDetailsComponent,
+    BadgeReadoutComponent,
+    DirectEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   entryComponents: [
     CheckpointsComponent,
     ClassesComponent,
-    MapsComponent
+    MapsComponent,
+    DirectEntryComponent,
+    RunnersComponent,
+    RunnerDetailsComponent,
+    BadgeReadoutComponent
   ]
 })
 export class AppModule { }

@@ -42,6 +42,10 @@
         "CHECKPOINTS_ADMIN": "Administrera kontroller",
         "MAPS_ADMIN": "Administrera banor",
         "CLASSES_ADMIN": "Administrera klasser",
+        "RUNNERS": "Löpare",
+        "ADD_RUNNER": "Lägg till läpare",
+        "BADGE_READOUT": "Läs in löparbrickor",
+        "DIRECT_ENTRY": "Direktanmälan",
         "COMPETITION_CLOSE": "Stäng tävling"
     }
 }

@@ -42,6 +42,10 @@
         "CHECKPOINTS_ADMIN": "Admin checkpoints",
         "MAPS_ADMIN": "Admin maps",
         "CLASSES_ADMIN": "Admin classes",
+        "RUNNERS": "Runners",
+        "ADD_RUNNER": "Add runner",
+        "BADGE_READOUT": "Badge readout",
+        "DIRECT_ENTRY": "Direct entry",
         "COMPETITION_CLOSE": "Close competition"
     }
 }

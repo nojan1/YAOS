@@ -5,6 +5,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { IMatchedTabCommand, ICommandProvider, CommandType } from './common';
 import { ClassesComponent } from '../../components/classes/classes.component';
 import { MapsComponent } from '../../components/maps/maps.component';
+import { RunnersComponent } from '../../components/runners/runners.component';
+import { RunnerDetailsComponent } from '../../components/runner-details/runner-details.component';
+import { BadgeReadoutComponent } from '../../components/badge-readout/badge-readout.component';
+import { DirectEntryComponent } from '../../components/direct-entry/direct-entry.component';
 
 interface TabSpecification {
   translateKey: string,
@@ -31,6 +35,22 @@ export class TabCommandProviderService implements ICommandProvider {
       {
         translateKey: 'COMMANDS.CLASSES_ADMIN',
         componentType: ClassesComponent
+      },
+      {
+        translateKey: 'COMMANDS.RUNNERS',
+        componentType: RunnersComponent
+      },
+      {
+        translateKey: 'COMMANDS.ADD_RUNNER',
+        componentType: RunnerDetailsComponent
+      },
+      {
+        translateKey: 'COMMANDS.BADGE_READOUT',
+        componentType: BadgeReadoutComponent
+      },
+      {
+        translateKey: 'COMMANDS.DIRECT_ENTRY',
+        componentType: DirectEntryComponent
       }
     ] as TabSpecification[];
 
