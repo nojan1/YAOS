@@ -9,7 +9,7 @@ import { ServerStateService } from '../../providers/server-state.service';
   templateUrl: './classes.component.html',
   styleUrls: ['./classes.component.scss']
 })
-export class ClassesComponent extends EditingComponentBase<WebClient.IClassModel> implements OnInit, TabbedComponent {
+export class ClassesComponent extends EditingComponentBase<WebClient.IClassWithPropertiesModel> implements OnInit, TabbedComponent {
   titleChange: (newTitle: string) => void;
 
   constructor(private classClient: WebClient.ClassClient, private serverStateService: ServerStateService) {
@@ -21,7 +21,7 @@ export class ClassesComponent extends EditingComponentBase<WebClient.IClassModel
       .subscribe(x => this.items = x);
   }
 
-  protected emptyItemFactory(): WebClient.IClassModel {
+  protected emptyItemFactory(): WebClient.IClassWithPropertiesModel {
     return {
       id: 0,
       allowBadgeStart: true,

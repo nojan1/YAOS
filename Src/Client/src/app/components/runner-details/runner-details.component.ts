@@ -9,9 +9,12 @@ import { TabbedComponent } from '../../providers/tab.service';
 export class RunnerDetailsComponent implements OnInit, TabbedComponent {
   titleChange: (newTitle: string) => void;
 
+  public runnerId: number;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.runnerId);
   }
 
 }

@@ -4,6 +4,7 @@ export interface Tab {
   title: string;
   componentType: Type<TabbedComponent>;
   componentReference?: TabbedComponent;
+  parameters?: any;
 }
 
 export interface TabbedComponent {
@@ -24,10 +25,11 @@ export class TabService {
 
   }
 
-  public openTab(componentType: Type<TabbedComponent>){
+  public openTab(componentType: Type<TabbedComponent>, parameters: any = null){
     this.tabs.push({
       title: "Ny tab",
-      componentType: componentType
+      componentType: componentType,
+      parameters: parameters
     });
 
     this.activeTab = this.tabs[this.tabs.length - 1];

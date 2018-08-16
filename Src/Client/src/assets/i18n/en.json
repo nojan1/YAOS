@@ -33,6 +33,12 @@
             "START_TIME_SPACING": "Time spread for start times (minutes)",
             "VACANCY_PERCENTAGE": "Vacancy percentage",
             "MAP": "Map"
+        },
+        "RUNNERS": {
+            "RUNNER_NAME": "Name",
+            "CLUB_NAME": "Club",
+            "BADGE_NUMBER": "Badge number",
+            "CLASS": "Class"
         }
     },
     "PALETE": {

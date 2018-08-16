@@ -33,6 +33,12 @@
             "START_TIME_SPACING": "Tidsförskjutning (minuter)",
             "VACANCY_PERCENTAGE": "Vakanser (procent)",
             "MAP": "Karta"
+        },
+        "RUNNERS": {
+            "RUNNER_NAME": "Namn",
+            "CLUB_NAME": "Förening",
+            "BADGE_NUMBER": "Bricknummer",
+            "CLASS": "Klass"
         }
     },
     "PALETE": {

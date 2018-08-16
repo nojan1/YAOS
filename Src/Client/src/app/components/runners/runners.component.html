@@ -1,3 +1,27 @@
-<p>
-  runners works!
-</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        {{'TABS.RUNNERS.RUNNER_NAME' | translate:param}}
+      </th>
+      <th>
+        {{'TABS.RUNNERS.CLUB_NAME' | translate:param}}
+      </th>
+      <th>
+        {{'TABS.RUNNERS.BADGE_NUMBER' | translate:param}}
+      </th>
+      <th>
+        {{'TABS.RUNNERS.CLASS' | translate:param}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let runner of runners" (click)="openRunner(runner)">
+      <td>{{runner.name}}}</td>
+      <td>{{runner.club}}}</td>
+      <td>{{runner.badge?.number}}</td>
+      <td>{{runner.class?.name}}</td>
+    </tr> 
+  </tbody>
+</table>

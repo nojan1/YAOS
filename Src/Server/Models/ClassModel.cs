@@ -9,6 +9,10 @@ namespace Server.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class ClassWithPropertiesModel : ClassModel
+    {
         public bool AllowBadgeStart { get; set; } = true;
         public int VacancyPercentage { get; set; } = 20;
         public int TimeSpacing { get; set; } = 2;

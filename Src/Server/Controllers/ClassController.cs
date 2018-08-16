@@ -20,13 +20,13 @@ namespace Server.Controllers
             _context = context;
         }
 
-        [Produces(typeof(IEnumerable<ClassModel>))]
+        [Produces(typeof(IEnumerable<ClassWithPropertiesModel>))]
         [HttpGet("")]
         public IActionResult Get(int competitionID)
         {
             return Ok(_context.Classes
                 .Where(x => x.Stage.CompetitionID == competitionID)
-                .Select(x => new ClassModel
+                .Select(x => new ClassWithPropertiesModel
                 {
                     Id = x.ID,
                     Name = x.Name,
