@@ -13,7 +13,8 @@
         },
         "CHECKPOINTS": {
             "CODE": "Station code",
-            "ADD": "Add new"
+            "ADD": "Add new",
+            "SAVE": "Save (Ctrl+s)"
         },
         "HOME": {
             "TITLE": "App works !"

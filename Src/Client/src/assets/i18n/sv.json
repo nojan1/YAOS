@@ -13,7 +13,8 @@
         },
         "CHECKPOINTS": {
             "CODE": "Kodsiffra",
-            "ADD": "Lägg till"
+            "ADD": "Lägg till",
+            "SAVE": "Spara (Ctrl+s)"
         },
         "HOME": {
             "TITLE": "Appen funkar!"

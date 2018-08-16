@@ -22,3 +22,7 @@
   .clearfix::after{
       clear:both;
   }
+
+  .fill-height{
+      min-height: 100%;
+  }

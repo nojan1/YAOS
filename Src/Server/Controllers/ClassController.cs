@@ -9,7 +9,7 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]/{competitionID:int}/")]
+    [Route("api/competition/{competitionID:int}/[controller]/")]
     [ApiController]
     public class ClassController : ControllerBase
     {

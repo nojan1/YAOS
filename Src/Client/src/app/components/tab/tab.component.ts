@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { TabService } from '../../providers/tab.service';
 
@@ -8,6 +8,7 @@ import { TabService } from '../../providers/tab.service';
   styleUrls: ['./tab.component.scss']
 })
 export class TabComponent implements OnInit {
+  @Input("isMaximized") isMaximized: boolean;
 
   constructor(public tabService: TabService) { }
 

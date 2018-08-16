@@ -1,5 +1,8 @@
+export interface IEditingComponentBase {
+    save();
+}
 
-export abstract class EditingComponentBase<T>{
+export abstract class EditingComponentBase<T> implements IEditingComponentBase{
     public items: T[] = [];
     public workingCopy: T;
     public inEditMode: boolean = false;
@@ -36,5 +39,6 @@ export abstract class EditingComponentBase<T>{
         this.backup = null;
     }
 
+    public save(){ }
     protected abstract emptyItemFactory() : T;
 }

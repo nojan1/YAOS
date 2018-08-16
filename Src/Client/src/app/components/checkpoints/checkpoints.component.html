@@ -16,17 +16,21 @@
     </table>
   </div>
   <div class="pane">
-   
     <div class="well">
-        <button class="btn btn-default pull-right" (click)="createNew()">
-            <span class="icon icon-plus"></span>
-            {{'TABS.CHECKPOINTS.ADD' | translate:param}}
+      <form #checkpointForm="ngForm">
+        <button class="btn btn-default pull-left" (click)="save()" [disabled]="!checkpointForm.form.valid || checkpointForm.form.pristine" *ngIf="inEditMode">
+          <span class="icon icon-upload"></span>&nbsp; {{'TABS.CHECKPOINTS.SAVE' | translate:param}}
         </button>
-      <div class="clearfix"></div>
-      <form *ngIf="workingCopy">
-        <div class="form-group">
+
+        <button class="btn btn-default pull-right" (click)="createNew()">
+          <span class="icon icon-plus"></span>
+          {{'TABS.CHECKPOINTS.ADD' | translate:param}}
+        </button>
+
+        <div class="clearfix"></div>
+        <div class="form-group" *ngIf="workingCopy">
           <label>{{'TABS.CHECKPOINTS.CODE' | translate:param}}</label>
-          <input type="number" name="code" class="form-control" [(ngModel)]="workingCopy.code" *ngIf="isNew"/>
+          <input type="number" name="code" class="form-control" [(ngModel)]="workingCopy.code" *ngIf="isNew" />
           <label *ngIf="!isNew">{{workingCopy.code}}</label>
         </div>
       </form>

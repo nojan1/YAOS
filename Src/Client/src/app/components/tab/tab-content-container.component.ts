@@ -6,7 +6,7 @@ import { Tab, TabbedComponent, TabService } from '../../providers/tab.service';
   template: '<ng-content></ng-content>',
 })
 export class TabContentContainer implements OnInit, OnDestroy {
-    
+
   @Input("tab") tab: Tab;
 
   private componentRef: ComponentRef<any>;
@@ -14,18 +14,18 @@ export class TabContentContainer implements OnInit, OnDestroy {
   constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef, private tabService: TabService) { }
 
   ngOnInit() {
-    if(!this.tab)
-        throw new Error("Binded tab is null");
+    if (!this.tab)
+      throw new Error("Binded tab is null");
 
     let factory = this.resolver.resolveComponentFactory(this.tab.componentType);
     this.componentRef = this.viewContainerRef.createComponent(factory);
 
-    let tabbedComponent = this.componentRef.instance as TabbedComponent; 
+    this.tab.componentReference = this.componentRef.instance as TabbedComponent;
   }
 
   ngOnDestroy() {
-    if(this.componentRef)
-        this.componentRef.destroy();
+    if (this.componentRef)
+      this.componentRef.destroy();
   }
 
 }

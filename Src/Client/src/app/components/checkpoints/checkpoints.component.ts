@@ -24,8 +24,20 @@ export class CheckpointsComponent extends EditingComponentBase<WebClient.ICheckp
   protected emptyItemFactory(): WebClient.ICheckpointModel{
     return {
       id: 0,
-      code : 0
+      code : 0,
+      stageId: 0
     };
   }
 
+  save(){
+    if(this.isNew){
+      this.checkpointClient.post(this.serverStateService.competitionId, new WebClient.CheckpointModel(this.workingCopy))
+        .subscribe(x => {
+          this.items.push(x);
+          this.reset();
+        }, error => console.error(error));
+    }else{
+
+    }
+  }
 }

@@ -1,10 +1,11 @@
 <div class="commandpalete">
   <input type="text" 
-         (click)="outputOpen = true" 
+         (click)="onActivate()" 
          (input)="onInput($event)" 
          (keyup)="onKeyUp($event)" 
          (focusout)="closeOutput()" 
-         placeholder="{{ 'PALETE.PLACEHOLDER_TEXT' | translate:param }}" />
+         placeholder="{{ 'PALETE.PLACEHOLDER_TEXT' | translate:param }}" 
+         #paleteInput />
 
   <div class="output" *ngIf="outputOpen">
       <ul class="list-group">

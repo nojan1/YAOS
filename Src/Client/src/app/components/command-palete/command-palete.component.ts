@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ElementRef } from '@angular/core';
 import {CommandService } from '../../providers/command.service';
 import { CommandItem } from '../../providers/command-providers/common';
 
@@ -9,6 +9,7 @@ import { CommandItem } from '../../providers/command-providers/common';
 })
 export class CommandPaleteComponent implements OnInit {
 
+  @ViewChild("paleteInput") paleteInputField: ElementRef;
   outputOpen: boolean = false;
   commandItems: CommandItem[] = [];
   activeCommandItem: CommandItem;
@@ -16,7 +17,14 @@ export class CommandPaleteComponent implements OnInit {
   constructor(private commandService: CommandService, private injector: Injector) { }
 
   ngOnInit() {
+    this.commandService.triggerCommandPalate = () => { 
+      this.paleteInputField.nativeElement.focus();
+      this.onActivate();
+    }
+  }
 
+  onActivate(){
+    this.outputOpen = true;
   }
 
   onInput(event: any){
@@ -51,6 +59,9 @@ export class CommandPaleteComponent implements OnInit {
 
   selectCommandItem(commandItem: CommandItem){
     commandItem.action(this.injector);
+    
+    this.paleteInputField.nativeElement.value = "";
+    this.paleteInputField.nativeElement.blur();
     this.closeOutput();
   }
 

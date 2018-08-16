@@ -2,12 +2,15 @@
   <!-- Your app's content goes inside .window-content -->
   <div class="window-content">
       <div class="pane-group">
-          <div class="pane-mini sidebar">
+          <div class="pane-mini sidebar" [hidden]="isMaximized">
             <app-sidemenu></app-sidemenu>
           </div>
           <div class="pane">
-              <app-command-palete></app-command-palete>
-              <app-tab></app-tab>
+              <div [hidden]="isMaximized">
+                <app-command-palete></app-command-palete>
+              </div>
+
+              <app-tab [isMaximized]="isMaximized"></app-tab>
           </div>
         </div>
   </div>

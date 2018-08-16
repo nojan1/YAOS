@@ -9,6 +9,8 @@ import { GenericCommandProviderService } from './command-providers/generic-comma
 })
 export class CommandService {
 
+  public triggerCommandPalate : () => void;
+
   private providers : ICommandProvider[];
 
   constructor(private tabService: TabService, private tabCommandProviderService: TabCommandProviderService, private genericCommandProviderService: GenericCommandProviderService) { 

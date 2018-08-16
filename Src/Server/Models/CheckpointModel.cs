@@ -8,6 +8,7 @@ namespace Server.Models
     public class CheckpointModel
     {
         public int Id { get; set; }
+        public int StageId { get; set; }
         public int Code { get; set; }
 
     }

@@ -3,6 +3,7 @@ import { Injectable, Type } from '@angular/core';
 export interface Tab {
   title: string;
   componentType: Type<TabbedComponent>;
+  componentReference?: TabbedComponent;
 }
 
 export interface TabbedComponent {
