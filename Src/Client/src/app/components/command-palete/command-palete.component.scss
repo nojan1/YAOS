@@ -2,9 +2,11 @@ $commandOutputBorder: gray;
 
 .commandpalete {
     margin: 5px;
+    display:block !important;
+    width:100% !important;
 
     input {
-        width: 100%;
+        width: 100% !important;
         margin-bottom:0;
     }
 

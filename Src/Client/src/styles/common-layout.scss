@@ -26,3 +26,25 @@
   .fill-height{
       min-height: 100%;
   }
+
+  .spacing-top {
+      margin-top:5px;
+
+      .ui-card-body {
+        margin-top:5px;
+      }
+  }
+
+.clickable {
+    cursor: pointer;
+}
+
+.flex-content {
+    display: flex;
+    flex: 1;
+    height:100%;
+}
+
+.full-height {
+    min-height: 100%;
+}

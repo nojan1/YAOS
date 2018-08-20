@@ -2,6 +2,7 @@ import 'zone.js/dist/zone-mix';
 import 'reflect-metadata';
 import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -32,13 +33,29 @@ import { RunnersComponent } from './components/runners/runners.component';
 import { RunnerDetailsComponent } from './components/runner-details/runner-details.component';
 import { BadgeReadoutComponent } from './components/badge-readout/badge-readout.component';
 import { DirectEntryComponent } from './components/direct-entry/direct-entry.component';
+import { SportidentDiagnosticsComponent } from './components/sportident-diagnostics/sportident-diagnostics.component';
 
 import { TabCommandProviderService } from './providers/command-providers/tab-command-provider.service';
 import { CompetitionSelectionComponent } from './components/competition-selection/competition-selection.component';
 import { ServerStateService } from './providers/server-state.service';
 import { GenericCommandProviderService } from './providers/command-providers/generic-command-provider.service';
 import { HosturlInterceptorService } from './providers/hosturl-interceptor.service';
+import { SportidentService } from './providers/sportident.service';
 import { WebClient } from '../WebClient.Generated';
+
+//PRIMENG
+import {MessageService} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
+import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
+import {InputTextModule} from 'primeng/inputtext';
+import {CardModule} from 'primeng/card';
+import {TableModule} from 'primeng/table';
+import {TabViewModule} from 'primeng/tabview';
+import {SpinnerModule} from 'primeng/spinner';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {DropdownModule} from 'primeng/dropdown';
+import {PanelModule} from 'primeng/panel';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,20 +78,33 @@ export function HttpLoaderFactory(http: HttpClient) {
     RunnersComponent,
     RunnerDetailsComponent,
     BadgeReadoutComponent,
-    DirectEntryComponent
+    DirectEntryComponent,
+    SportidentDiagnosticsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    ToastModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    CardModule,
+    TableModule,
+    TabViewModule,
+    SpinnerModule,
+    AutoCompleteModule,
+    DropdownModule,
+    PanelModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HosturlInterceptorService, multi: true },
@@ -86,7 +116,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ServerStateService,
     CommandService,
     TabCommandProviderService,
-    GenericCommandProviderService
+    GenericCommandProviderService,
+    SportidentService,
+
+    MessageService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -96,7 +129,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DirectEntryComponent,
     RunnersComponent,
     RunnerDetailsComponent,
-    BadgeReadoutComponent
+    BadgeReadoutComponent,
+    SportidentDiagnosticsComponent
   ]
 })
 export class AppModule { }

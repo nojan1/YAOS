@@ -1,0 +1,13 @@
+import { calculateCRC } from "../lib/common";
+
+let test_data =  [
+    // 0x02
+    0x53, 0x00, 0x05, 0x01, 0x0F,
+    0xB5, 0x00, 0x00, 0x1E, 0x08 
+    // 0x2C, 0x12, 0x03
+];
+
+let checksum = calculateCRC(Buffer.from(test_data));
+let hex = checksum.toString(16);
+
+console.log(hex);

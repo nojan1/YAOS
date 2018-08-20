@@ -8,7 +8,7 @@ export interface Tab {
 }
 
 export interface TabbedComponent {
-  titleChange : (newTitle: string) => void;  
+  titleChange: (newTitle: string) => void;
 }
 
 @Injectable({
@@ -17,15 +17,15 @@ export interface TabbedComponent {
 export class TabService {
 
   public tabs: Tab[] = [];
-  public activeTab : Tab;
+  public activeTab: Tab;
 
   constructor() { }
 
-  public init(){
+  public init() {
 
   }
 
-  public openTab(componentType: Type<TabbedComponent>, parameters: any = null){
+  public openTab(componentType: Type<TabbedComponent>, parameters: any = null) {
     this.tabs.push({
       title: "Ny tab",
       componentType: componentType,
@@ -35,23 +35,27 @@ export class TabService {
     this.activeTab = this.tabs[this.tabs.length - 1];
   }
 
-  public setActive(tab: Tab){
-    if(this.tabs.indexOf(tab) == -1)
+  public setActive(tab: Tab) {
+    if (this.tabs.indexOf(tab) == -1)
       throw new Error("Tab not recognized");
 
     this.activeTab = tab;
   }
 
-  public closeTab(tab: Tab){
+  public setActiveIndex(index: number){
+    this.setActive(this.tabs[index]);
+  }
+
+  public closeTab(tab: Tab) {
     let tabIndex = this.tabs.indexOf(tab);
 
-    if(tabIndex == -1)
+    if (tabIndex == -1)
       throw new Error("Tab not recognized");
 
-    if(this.activeTab == tab){
-      if(tabIndex == 0){
+    if (this.activeTab == tab) {
+      if (tabIndex == 0) {
         this.activeTab = this.tabs[1];
-      }else{
+      } else {
         this.activeTab = this.tabs[tabIndex - 1];
       }
     }
@@ -59,10 +63,14 @@ export class TabService {
     this.tabs.splice(tabIndex, 1);
   }
 
-  public setTitle(tab: Tab, title: string){
-    if(this.tabs.indexOf(tab) == -1)
+  public closeTabIndex(tabIndex: number) {
+    this.closeTab(this.tabs[tabIndex]);
+  }
+
+  public setTitle(tab: Tab, title: string) {
+    if (this.tabs.indexOf(tab) == -1)
       throw new Error("Tab not recognized");
 
-      tab.title = title;
+    tab.title = title;
   }
 }

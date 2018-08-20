@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   @HostListener("window:keyup", ["$event"])
   onKeyUp(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key == "s") {
+    if (event.ctrlKey && event.key == "s" && this.tabService.activeTab) {
       let editingComponent = this.tabService.activeTab.componentReference as any;
       if (editingComponent.save)
         editingComponent.save();

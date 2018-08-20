@@ -1,20 +1,11 @@
-<div class="tab-group" [hidden]="isMaximized">
-  <div class="tab-item" *ngFor="let tab of tabService.tabs" [class.active]="tab == tabService.activeTab" (click)="tabService.setActive(tab)">
-    <span class="icon icon-cancel icon-close-tab" (click)="tabService.closeTab(tab)"></span>
-    {{tab.title}}
-  </div>
-</div>
-
-<div class="tab-root-container" *ngIf="tabService.tabs.length; else noTabsPlaceholder">
-  <div *ngFor="let tab of tabService.tabs" 
-       [style.display]="tab == tabService.activeTab ? 'block' : 'none'" 
-       class="tab-container">
+<p-tabView [controlClose]="true" [hidden]="isMaximized" *ngIf="tabService.tabs.length; else noTabsPlaceholder" (onClose)="handleClose($event)" (onChange)="handleChange($event)">
+  <p-tabPanel [header]="tab.title" [closable]="true" *ngFor="let tab of tabService.tabs" [selected]="tab == tabService.activeTab">
     <app-tab-content-container [tab]="tab"></app-tab-content-container>
-  </div>
-</div>
+  </p-tabPanel>
+</p-tabView>
 
 <ng-template #noTabsPlaceholder>
-  <div style="display:flex;height:100%;">
+  <div class="flex-content">
     <div style="margin:auto;color:darkgray;text-align: center">
       <h1 style="font-size:5em;margin-bottom:0;padding-bottom:0;font-weight:bold;">YAOS</h1>
       <p style="font-size:2.5em;margin-top:0;padding-top:0;" [innerHTML]="'TABS.DEFAULT.INSTRUCTIONS' | translate:param"></p>

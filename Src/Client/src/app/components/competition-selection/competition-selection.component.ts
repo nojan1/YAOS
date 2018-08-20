@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServerStateService, ServerValidationResult, LOCAL_SERVER_ADDRESS } from '../../providers/server-state.service';
 import { Router } from '@angular/router';
 import { WebClient } from '../../../WebClient.Generated';
+import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-competition-selection',
@@ -9,14 +11,16 @@ import { WebClient } from '../../../WebClient.Generated';
   styleUrls: ['./competition-selection.component.scss']
 })
 export class CompetitionSelectionComponent implements OnInit {
-
   public competitions: WebClient.CompetitionModel[] = [];
-
-  public lastValidationResult: ServerValidationResult;
+  
   public useLocalServer: boolean = true;
   public serverAddress: string = "";
 
-  constructor(private serverStateService: ServerStateService, private competitionClient: WebClient.CompetitionClient, private router: Router) { }
+  constructor(private serverStateService: ServerStateService,
+    private competitionClient: WebClient.CompetitionClient,
+    private router: Router,
+    private messageService: MessageService,
+    private translate: TranslateService) { }
 
   ngOnInit() {
     this.useLocalServerChanged();
@@ -24,7 +28,6 @@ export class CompetitionSelectionComponent implements OnInit {
 
   public useLocalServerChanged() {
     if (this.useLocalServer) {
-      this.lastValidationResult = null;
       this.getCompetitions(LOCAL_SERVER_ADDRESS);
     }
   }
@@ -50,7 +53,22 @@ export class CompetitionSelectionComponent implements OnInit {
             });
         }
 
-        this.lastValidationResult = result;
+        this.handleValidationResult(result);
       });
+  }
+
+  handleValidationResult(result: ServerValidationResult): any {
+    let translateKey = [
+      "TABS.COMPETITION_SELECTION.VALIDATION_FAIL",
+      "TABS.COMPETITION_SELECTION.VALIDATION_WRONGVERSION",
+      "TABS.COMPETITION_SELECTION.VALIDATION_SUCCESS"
+    ][result - 1];
+
+    this.translate.get(translateKey)
+      .subscribe(text => this.messageService.add({
+        severity: result == ServerValidationResult.Success ? "success" : "error",
+        summary: text,
+        sticky: true
+      }));
   }
 }

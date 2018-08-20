@@ -1,4 +1,4 @@
-<div class="commandpalete">
+<!-- <div class="commandpalete">
   <input type="text" 
          (click)="onActivate()" 
          (input)="onInput($event)" 
@@ -16,4 +16,13 @@
           </li>
         </ul>
   </div>
-</div>
+</div> -->
+<div class="commandpalete"></div>
+<p-autoComplete [(ngModel)]="searchString" 
+                [suggestions]="commandItems" 
+                (completeMethod)="search($event)"
+                (onSelect)="onSelect($event)" 
+                autoHighlight="true"
+                field="title"
+                styleClass="commandpalete"
+                placeholder="{{ 'PALETE.PLACEHOLDER_TEXT' | translate:param }}"></p-autoComplete>

@@ -1,0 +1,59 @@
+
+<h1 class="pull-left">Ports</h1>
+<button pButton type="button" class="pull-right" (click)="ngOnInit()" label="Reload" icon="pi pi-refresh"></button>
+
+<div class="clearfix"></div>
+
+<p-table [value]="ports">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>comName</th>
+      <th>manufacturer</th>
+      <th>serialNumber</th>
+      <th>locationId</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-port>
+    <tr>
+      <td>{{port.comName}}</td>
+      <td>{{port.manufacturer}}</td>
+      <td>{{port.serialNumber}}</td>
+      <td>{{port.locationId}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<hr />
+
+<p-dropdown [options]="ports" [(ngModel)]="selectedPort" (onChange)="onPortSelect()" optionLabel="comName"></p-dropdown>
+
+<p-card *ngIf="currentStation && currentStation.protocolMode">
+  <p-panel header="ProtocolMode">
+    <table>
+      <tr>
+        <td>
+          <b>Extended protocol: </b> {{currentStation.protocolMode.extendedProtocol}}
+        </td>
+        <td>
+          <b>Auto send-out: </b> {{currentStation.protocolMode.autoSendOut}}
+        </td>
+        <td>
+          <b>Handshake: </b> {{currentStation.protocolMode.handshake}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Password access: </b> {{currentStation.protocolMode.passwordAccess}}
+        </td>
+        <td>
+          <b>Read SI-Card after punch: </b> {{currentStation.protocolMode.readSICardAfterPunch}}
+        </td>
+      </tr>
+    </table>
+  </p-panel>
+
+  <p-panel header="Test modes">
+    <p-button label="Badge detect"></p-button>
+    <p-button label="Badge readout"></p-button>
+  </p-panel>
+</p-card>

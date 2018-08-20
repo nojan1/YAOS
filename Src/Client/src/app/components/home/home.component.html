@@ -1,5 +1,4 @@
-<div class="window">
-  <!-- Your app's content goes inside .window-content -->
+<!-- <div class="window">
   <div class="window-content">
       <div class="pane-group">
           <div class="pane-mini sidebar" [hidden]="isMaximized">
@@ -14,4 +13,21 @@
           </div>
         </div>
   </div>
+</div> -->
+
+<div class="ui-g full-height">
+    <div class="ui-g-1" [hidden]="isMaximized">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="ui-g-11 ui-g-nopad">
+        <div class="ui-g-12" [hidden]="isMaximized">
+            <app-command-palete></app-command-palete>
+        </div>
+        <div class="ui-g-12 ui-g-nopad full-height">
+            <app-tab [isMaximized]="isMaximized"></app-tab>
+        </div>
+    </div>
+    <div class="ui-g-12">
+        Footer
+    </div>
 </div>

@@ -1,66 +1,61 @@
 <div class="pane-group-relative fill-height">
   <div class="pane">
-    <table class="table-striped">
-      <thead>
+    <p-table [value]="items">
+      <ng-template pTemplate="header">
         <tr>
-          <th>{{'TABS.CLASSES.NAME' | translate:param}}</th>
-          <th>{{'TABS.MAPS.NAME' | translate:param}}</th>
+          <th>{{'TABS.CLASSES.NAME' | translate}}</th>
+          <th>{{'TABS.MAPS.NAME' | translate}}</th>
         </tr>
-      </thead>
-      <tbody *ngFor="let class of items">
+      </ng-template>
+      <ng-template pTemplate="body" let-class>
         <tr (click)="edit(class)">
           <td>
-            {{class.name}}
-          </td>
+            {{class.name}}</td>
           <td>
             [banans namn]
           </td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+    </p-table>
   </div>
-  <div class="pane">
 
+  <div class="pane">
     <div class="well">
       <form #classForm="ngForm">
-        <button class="btn btn-default pull-left" (click)="createNew()" [disabled]="!classForm.form.valid" *ngIf="inEditMode">
-          <span class="icon icon-upload"></span>&nbsp;
-          {{'TABS.CLASSES.SAVE' | translate:param}}
+        <button class="pull-left ui-button-secondary" pButton (click)="save()" [disabled]="!classForm.form.valid || classForm.form.pristine"
+          *ngIf="inEditMode" label="{{'TABS.CLASSES.SAVE' | translate}}" icon="fa fa-save">
         </button>
 
-        <button class="btn btn-default pull-right" (click)="createNew()">
-          <span class="icon icon-plus"></span>
-          {{'TABS.CLASSES.ADD' | translate:param}}
+        <button class="pull-right ui-button-secondary" pButton (click)="createNew()" label="{{'TABS.CLASSES.ADD' | translate}}"
+          icon="fa fa-plus">
         </button>
 
         <div class="clearfix"></div>
 
-        <div *ngIf="workingCopy" style="margin-top:5px;">
-          <div class="form-group">
-            <label>{{'TABS.CLASSES.NAME' | translate:param}}</label>
-            <input type="text" name="className" class="form-control" [(ngModel)]="workingCopy.name" />
-          </div>
+        <div *ngIf="workingCopy" class="spacing-top">
 
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" [(ngModel)]="workingCopy.allowBadgeStart" name="allowBadgeStart"> {{'TABS.CLASSES.ALLOW_BADGE_START' | translate:param}}
-            </label>
-          </div>
+          <span class="ui-float-label">
+            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="workingCopy.name" name="className">
+            <label for="float-input">{{'TABS.CLASSES.NAME' | translate}}</label>
+          </span>
 
-          <div class="form-group">
-            <label>{{'TABS.CLASSES.VACANCY_PERCENTAGE' | translate:param}}</label>
-            <input type="number" class="form-control" [(ngModel)]="workingCopy.vacancyPercentage" name="vacancyPercentage">
-          </div>
+          <p-checkbox name="allowBadgeStart" [(ngModel)]="workingCopy.allowBadgeStart" binary="true" label="{{'TABS.CLASSES.ALLOW_BADGE_START' | translate}}"></p-checkbox>
+
+          <span class="ui-float-label">
+            <p-spinner size="30" [(ngModel)]="workingCopy.vacancyPercentage" name="vacancyPercentage"></p-spinner>
+            <label for="float-input">{{'TABS.CLASSES.VACANCY_PERCENTAGE' | translate}}</label>
+          </span>
 
           <div class="form-group-box">
-            <input type="checkbox" [(ngModel)]="workingCopy.hasStartTime" name="hasStartTime"> {{'TABS.CLASSES.HAS_START_TIME' | translate:param}}
+            <p-checkbox [(ngModel)]="workingCopy.hasStartTime" name="hasStartTime" binary="true" label="{{'TABS.CLASSES.HAS_START_TIME' | translate}}"></p-checkbox>
+
             <div class="form-group-box-inner" [hidden]="!workingCopy.hasStartTime">
-              <div class="form-group">
-                <label>{{'TABS.CLASSES.START_TIME_SPACING' | translate:param}}</label>
-                <input type="number" class="form-control" name="timeSpacing" [(ngModel)]="workingCopy.timeSpacing">
-              </div>
+              <span class="ui-float-label">
+                <p-spinner size="30" [(ngModel)]="workingCopy.timeSpacing" name="timeSpacing"></p-spinner>
+                <label for="float-input">{{'TABS.CLASSES.START_TIME_SPACING' | translate}}</label>
+              </span>
             </div>
-          </div>
+          </div>     
         </div>
       </form>
     </div>

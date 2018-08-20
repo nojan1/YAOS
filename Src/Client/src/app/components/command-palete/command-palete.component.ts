@@ -9,6 +9,8 @@ import { CommandItem } from '../../providers/command-providers/common';
 })
 export class CommandPaleteComponent implements OnInit {
 
+  searchString: string;
+
   @ViewChild("paleteInput") paleteInputField: ElementRef;
   outputOpen: boolean = false;
   commandItems: CommandItem[] = [];
@@ -21,6 +23,18 @@ export class CommandPaleteComponent implements OnInit {
       this.paleteInputField.nativeElement.focus();
       this.onActivate();
     }
+  }
+
+  search(event){
+    if(!this.searchString)
+      this.commandItems = [];
+
+    this.commandItems = this.commandService.match(this.searchString);
+  }
+
+  onSelect(commandItem: CommandItem){
+    commandItem.action(this.injector);
+    this.searchString = "";
   }
 
   onActivate(){

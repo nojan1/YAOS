@@ -52,6 +52,7 @@
         "ADD_RUNNER": "Lägg till läpare",
         "BADGE_READOUT": "Läs in löparbrickor",
         "DIRECT_ENTRY": "Direktanmälan",
+        "SPORTIDENT_DIAG": "Sportident diagnostik",
         "COMPETITION_CLOSE": "Stäng tävling"
     }
 }

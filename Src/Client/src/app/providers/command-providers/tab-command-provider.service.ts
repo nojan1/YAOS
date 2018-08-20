@@ -9,6 +9,7 @@ import { RunnersComponent } from '../../components/runners/runners.component';
 import { RunnerDetailsComponent } from '../../components/runner-details/runner-details.component';
 import { BadgeReadoutComponent } from '../../components/badge-readout/badge-readout.component';
 import { DirectEntryComponent } from '../../components/direct-entry/direct-entry.component';
+import { SportidentDiagnosticsComponent } from '../../components/sportident-diagnostics/sportident-diagnostics.component';
 
 interface TabSpecification {
   translateKey: string,
@@ -51,6 +52,10 @@ export class TabCommandProviderService implements ICommandProvider {
       {
         translateKey: 'COMMANDS.DIRECT_ENTRY',
         componentType: DirectEntryComponent
+      },
+      {
+        translateKey: 'COMMANDS.SPORTIDENT_DIAG',
+        componentType: SportidentDiagnosticsComponent
       }
     ] as TabSpecification[];
 

@@ -16,4 +16,11 @@ export class TabComponent implements OnInit {
     this.tabService.init();
   }
 
+  handleClose(event: any){
+    this.tabService.closeTabIndex(event.index);
+  }
+
+  handleChange(event: any){
+    this.tabService.setActiveIndex(event.index);
+  }
 }

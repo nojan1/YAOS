@@ -27,9 +27,9 @@ export interface ProtocolMode {
     readSICardAfterPunch: number
 }
 
-export function detectBaseStation(comName: string) : Promise<StationInfo> {
+export function detectBaseStation(comName: string, serialPort: any) : Promise<StationInfo> {
     return new Promise((resolve, reject) => {
-        let port = new SerialPort(comName, {
+        let port = new serialPort(comName, {
             baudRate: BaudRate.B38400,
             dataBits: 8,
             parity: "none",
@@ -90,14 +90,15 @@ export class Station {
     public get protocolMode(){ return this._protocolMode; }
     public get serialPort(){ return this._serialPort; }
 
-    constructor(private comName: string, private stationInfo: StationInfo){
-        this._serialPort = new SerialPort(comName, {
+    constructor(private comName: string, private stationInfo: StationInfo, serialPort: any){
+        this._serialPort = new serialPort(comName, {
             baudRate: stationInfo.baudRate,
             dataBits: 8,
             parity: "none",
-            stopBits: 1,
-            autoOpen: true
+            stopBits: 1
         });
+
+        this._serialPort.on("error", x => console.error(x));
     }
 
     public changeSpeed(baudRate: BaudRate) {
@@ -124,8 +125,10 @@ export class Station {
             sendExtendedCommand(this._serialPort, ExtendedCommand.GET_SYSTEM_VALUE, [0x74, 0x01]);
             
             let response = readResponse(this._serialPort);
-            if(!response)
+            if(!response){
                 reject();
+                return;
+            }
 
             let protocolConfigurationByte = response.data[0];
             this._protocolMode = {

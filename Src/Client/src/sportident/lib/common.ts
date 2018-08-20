@@ -7,7 +7,7 @@ export interface Response {
     data: Buffer
 }
 
-function calculateCRC(buffer: Buffer): number {
+export function calculateCRC(buffer: Buffer): number {
     const POLY = 0x8005;
     const BITF = 0x8000;
 
@@ -66,19 +66,20 @@ export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, 
 
     buffer[0] = STX;
     buffer[1] = command;
-    buffer[3] = protocolLength;
+    buffer[2] = protocolLength;
 
-    let i = 2;
+    let i = 3;
     if(parameters){
         parameters.forEach((v,z) => buffer[i++] = v);
     }
 
-    let crc = calculateCRC(buffer);
-    buffer.writeUInt16LE(crc, i);
+    let crc = calculateCRC(buffer.slice(1, totalLength - 3));
+    buffer.writeUInt16BE(crc, i);
 
     buffer[totalLength - 1] = ETX;
 
     port.write(buffer);
+    port.drain(() => console.log("drain complete"));
 }
 
 export function sendCommand(port: SerialPort, command: Command, parameters?:number[]) {

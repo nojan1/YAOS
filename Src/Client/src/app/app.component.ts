@@ -12,8 +12,14 @@ export class AppComponent {
   constructor(public electronService: ElectronService,
     private translate: TranslateService) {
 
-    translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
+
+    translate.setDefaultLang('en');
+    translate.use('en');
+
+    let browserLang = translate.getBrowserLang();
+    console.log("Browser language " + browserLang);
+    translate.use(browserLang);
 
     if (electronService.isElectron()) {
       console.log('Mode electron');

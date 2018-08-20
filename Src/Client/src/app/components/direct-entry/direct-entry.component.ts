@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TabbedComponent } from '../../providers/tab.service';
+import { SportidentService } from '../../providers/sportident.service';
 
 @Component({
   selector: 'app-direct-entry',
@@ -9,9 +10,10 @@ import { TabbedComponent } from '../../providers/tab.service';
 export class DirectEntryComponent implements OnInit, TabbedComponent {
   titleChange: (newTitle: string) => void;
 
-  constructor() { }
+  constructor(private sportidentService: SportidentService) { }
 
   ngOnInit() {
+    
   }
 
 }

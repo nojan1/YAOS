@@ -1,0 +1,89 @@
+@import "colors";
+
+$fontFamily: Segoe UI, Arial, sans-serif;
+$fontSize: 1em;
+$borderRadius: 6px;
+$disabledOpacity: 0.35;
+
+//Header
+$headerBorderWidth: 1px;
+$headerBorderColor: darken($color4, 10%);
+$headerBgColor: $color1;
+$headerTextColor: #cccccc;
+$headerFontWeight: bold;
+$headerIconTextColor: #cccccc;
+
+//Content
+$contentBorderWidth: 1px;
+$contentBorderColor: $color4;
+$contentBgColor: lighten($color3, 50%);
+$contentTextColor: darken($color5, 5%);
+
+//Default State
+$stateDefaultBorderWidth: 1px;
+$stateDefaultBorderColor:darken($color3, 10%);
+$stateDefaultBgColor: $color3;
+$stateDefaultTextColor: $color1;
+
+//Active State
+$stateActiveBorderColor: $color5;
+$stateActiveBgColor: $successcolor;
+$stateActiveTextColor: #ffffff;
+
+//Highlight State
+$stateHighlightBorderColor: #cccccc;
+$stateHighlightBgColor: #eeeeee;
+$stateHighlightTextColor: #2e7db2;
+
+//Focus State
+$stateFocusBorderColor: darken($color3, 10%);
+$stateFocusBgColor: $color3;
+$stateFocusTextColor: #ffffff;
+
+//Error State
+$stateErrorBorderColor: $alertcolor;
+$stateErrorBgColor: lighten($alertcolor, 25%);
+$stateErrorTextColor: $inputcolor;
+
+//Hover State
+$stateHoverBorderColor: darken($color2, 10%);
+$stateHoverBgColor: $color2;
+$stateHoverTextColor: #ffffff;
+
+//Forms
+$inputBgColor: #ffffff;
+$inputTextColor: $inputcolor;
+$invalidInputBorderColor: $alertcolor;
+$inputGroupTextColor: $color2;
+
+@import '../../node_modules/primeng/resources/themes/_theme';
+
+body .ui-toast .ui-toast-message {
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    margin: 0 0 1em 0; }
+    body .ui-toast .ui-toast-message.ui-toast-message-info {
+      background-color: #7fbcec;
+      border: 0 none;
+      color: #212121; }
+      body .ui-toast .ui-toast-message.ui-toast-message-info .ui-toast-close-icon {
+        color: #212121; }
+    body .ui-toast .ui-toast-message.ui-toast-message-success {
+      background-color: lighten($successcolor, 10%);
+      border: 0 none;
+      color: #212121; }
+      body .ui-toast .ui-toast-message.ui-toast-message-success .ui-toast-close-icon {
+        color: #212121; }
+    body .ui-toast .ui-toast-message.ui-toast-message-warn {
+      background-color: #ffe399;
+      border: 0 none;
+      color: #212121; }
+      body .ui-toast .ui-toast-message.ui-toast-message-warn .ui-toast-close-icon {
+        color: #212121; }
+    body .ui-toast .ui-toast-message.ui-toast-message-error {
+      background-color: $alertcolor;
+      border: 0 none;
+      color: #212121; }
+      body .ui-toast .ui-toast-message.ui-toast-message-error .ui-toast-close-icon {
+        color: #212121; }

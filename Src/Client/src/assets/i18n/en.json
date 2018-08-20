@@ -52,6 +52,7 @@
         "ADD_RUNNER": "Add runner",
         "BADGE_READOUT": "Badge readout",
         "DIRECT_ENTRY": "Direct entry",
+        "SPORTIDENT_DIAG": "Sportident diagnostics",
         "COMPETITION_CLOSE": "Close competition"
     }
 }
