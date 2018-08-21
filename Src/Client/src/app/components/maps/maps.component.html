@@ -1,13 +1,16 @@
-<div class="pane-group-relative">
-  <div class="pane">
-    <table class="table-striped">
-      <thead>
+<button pButton class="pull-right" (click)="createNew()" icon="pi pi-plus" label="{{'TABS.MAPS.ADD' | translate}}"></button>
+<div class="clearfix" style="clear:both;"></div>
+
+<div class="ui-g">
+  <div class="ui-g-7">
+    <p-table [value]="items">
+      <ng-template pTemplate="header">
         <tr>
-          <th>{{'TABS.MAPS.NAME' | translate:param}}</th>
-          <th>{{'TABS.MAPS.NUM_CHECKPOINTS' | translate:param}}</th>
+          <th>{{'TABS.MAPS.NAME' | translate}}</th>
+          <th>{{'TABS.MAPS.NUM_CHECKPOINTS' | translate}}</th>
         </tr>
-      </thead>
-      <tbody *ngFor="let map of items">
+      </ng-template>
+      <ng-template pTemplate="body" let-map>
         <tr (click)="edit(map)">
           <td>
             {{map.name}}
@@ -16,22 +19,17 @@
             {{map.checkpoints ? map.checkpoints.length : 0}}
           </td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+    </p-table>
   </div>
-  <div class="pane">
-    <div class="well">
-      <button class="btn btn-default pull-right" (click)="createNew()">
-        <span class="icon icon-plus"></span>
-        {{'TABS.MAPS.ADD' | translate:param}}
-      </button>
-      <div class="clearfix"></div>
-      <form *ngIf="workingCopy">
-        <div class="form-group">
-          <label>{{'TABS.MAPS.NAME' | translate:param}}</label>
-          <input type="text" name="mapName" class="form-control" [(ngModel)]="workingCopy.name" />
-        </div>
+  <div class="ui-g-5">
+    <p-card *ngIf="workingCopy">
+      <form>
+        <span class="ui-float-label">
+          <input id="float-input" type="text" name="mapName" [(ngModel)]="workingCopy.name" size="30">
+          <label for="float-input">{{'TABS.MAPS.NAME' | translate}}</label>
+        </span>
       </form>
-    </div>
+    </p-card>
   </div>
 </div>

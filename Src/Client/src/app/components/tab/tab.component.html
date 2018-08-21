@@ -1,15 +1,12 @@
 <p-tabView [controlClose]="true" 
-           [hidden]="isMaximized" 
            *ngIf="tabService.tabs.length; else noTabsPlaceholder" 
            (onClose)="handleClose($event)"
-           (onChange)="handleChange($event)" 
-           [ngStyle]="{height:'100%', width:'100%'}">
+           (onChange)="handleChange($event)">
 
   <p-tabPanel [header]="tab.title" 
               [closable]="true" 
               *ngFor="let tab of tabService.tabs" 
-              [selected]="tab == tabService.activeTab"
-              [ngStyle]="{height:'100%', width:'100%'}">
+              [selected]="tab == tabService.activeTab">
 
     <app-tab-content-container [tab]="tab"></app-tab-content-container>
   

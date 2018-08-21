@@ -17,21 +17,21 @@
     <div class="well">
       <form #checkpointForm="ngForm">
         <button class="pull-left ui-button-secondary" pButton (click)="save()" [disabled]="!checkpointForm.form.valid || checkpointForm.form.pristine"
-          *ngIf="inEditMode" label="{{'TABS.CHECKPOINTS.SAVE' | translate:param}}" icon="pi pi-save">
+          *ngIf="inEditMode" label="{{'TABS.CHECKPOINTS.SAVE' | translate}}" icon="pi pi-save">
         </button>
 
-        <button class="pull-right ui-button-secondary" pButton (click)="createNew()" label="{{'TABS.CHECKPOINTS.ADD' | translate:param}}" icon="pi pi-plus">
+        <button class="pull-right ui-button-secondary" pButton (click)="createNew()" label="{{'TABS.CHECKPOINTS.ADD' | translate}}" icon="pi pi-plus">
         </button>
 
         <div class="clearfix"></div>
 
         <div *ngIf="!isNew && workingCopy">
-            <label>{{'TABS.CHECKPOINTS.CODE' | translate:param}}</label>
+            <label>{{'TABS.CHECKPOINTS.CODE' | translate}}</label>
             <p>{{workingCopy.code}}</p>
         </div>
 
         <div class="form-group" *ngIf="workingCopy && isNew">
-          <label>{{'TABS.CHECKPOINTS.CODE' | translate:param}}</label>
+          <label>{{'TABS.CHECKPOINTS.CODE' | translate}}</label>
           <input type="number" name="code" class="form-control" [(ngModel)]="workingCopy.code" *ngIf="isNew" />
         </div>
       </form>
