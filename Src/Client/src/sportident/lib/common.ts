@@ -56,7 +56,7 @@ export function calculateCRC(buffer: Buffer): number {
 }
 
 export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, parameters?:number[]) {
-    let totalLength =  6 + (parameters ? parameters.length : 0);
+    let totalLength =  8 + (parameters ? parameters.length : 0);
     let protocolLength = parameters ? parameters.length : 0;
 
     if(protocolLength > 255)
@@ -64,16 +64,18 @@ export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, 
 
     let buffer = new Buffer(totalLength);
 
-    buffer[0] = STX;
-    buffer[1] = command;
-    buffer[2] = protocolLength;
+    buffer[0] = 0xFF;
+    buffer[1] = STX;
+    buffer[2] = STX;
+    buffer[3] = command;
+    buffer[4] = protocolLength;
 
-    let i = 3;
+    let i = 5;
     if(parameters){
         parameters.forEach((v,z) => buffer[i++] = v);
     }
 
-    let crc = calculateCRC(buffer.slice(1, totalLength - 3));
+    let crc = calculateCRC(buffer.slice(3, totalLength - 3));
     buffer.writeUInt16BE(crc, i);
 
     buffer[totalLength - 1] = ETX;
@@ -114,24 +116,25 @@ export function readResponse(port: SerialPort) : Response{
 }
 
 export function parseResponse(buffer: Buffer) : Response {
-    let parsedContent = [];
-    for(let i = 0; i < buffer.length;i++){
-        if(parsedContent.length || buffer[i] == STX || buffer[i] == NAK){
-            parsedContent.push(buffer[i]);
+    let stxIndex = 0;
+    while(buffer[stxIndex] != STX && stxIndex < buffer.length)
+        stxIndex++;
 
-            if(buffer[i] == ETX || buffer[i] == NAK)
-                break;
-        }
-    }
+    let len = buffer[stxIndex + 2];
+    let totalLength = 6 + len;
+    let end = stxIndex + totalLength;
 
-    if(parsedContent[0] != STX || parsedContent[parsedContent.length - 1] != ETX)
+    if(end > buffer.length)
         return null;
 
-    let parsedBuffer = Buffer.from(parsedContent);
+    let parsedBuffer = buffer.slice(stxIndex, end);
+
+    if(parsedBuffer[0] != STX || parsedBuffer[parsedBuffer.length - 1] != ETX)
+        return null;
 
     return {
-        command: parsedContent[1],
+        command: parsedBuffer[1],
         data: parsedBuffer.slice(5, parsedBuffer.length - 3),
-        stationCode: parsedBuffer.readUInt16LE(3)
+        stationCode: parsedBuffer.readUInt16BE(3)
     };
 }

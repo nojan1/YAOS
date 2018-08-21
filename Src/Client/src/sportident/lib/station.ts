@@ -3,6 +3,7 @@ import { sendCommand, sendExtendedCommand, readResponse } from './common';
 import { ExtendedCommand, NAK, Command, MasterStationCommunicationMode } from './constants';
 import { resolve } from 'url';
 import { Readout } from './readout-parser';
+import { Detector } from './badge-detector';
 
 export enum BaudRate {
     B4800 = 4800,
@@ -148,5 +149,12 @@ export class Station {
         this._serialPort.pipe(readoutParser);
         
         return readoutParser;
+    }
+
+    public badgeDetect(): Detector {
+        let detectParser = new Detector(this);
+        this._serialPort.pipe(detectParser);
+
+        return detectParser;
     }
 }

@@ -27,8 +27,8 @@
 
 <p-dropdown [options]="ports" [(ngModel)]="selectedPort" (onChange)="onPortSelect()" optionLabel="comName"></p-dropdown>
 
-<p-card *ngIf="currentStation && currentStation.protocolMode">
-  <p-panel header="ProtocolMode">
+<p-card *ngIf="currentStation">
+  <p-panel header="ProtocolMode" *ngIf="currentStation.protocolMode">
     <table>
       <tr>
         <td>
@@ -52,8 +52,16 @@
     </table>
   </p-panel>
 
-  <p-panel header="Test modes">
-    <p-button label="Badge detect"></p-button>
+  <p-panel header="Test modes" *ngIf="!activeTestMode">
+    <p-button label="Badge detect" (click)="startBadgeDetect()"></p-button>
     <p-button label="Badge readout"></p-button>
+  </p-panel>
+
+  <p-panel header="Badge detect test" *ngIf="activeTestMode == 1">
+    <h1>{{lastBadgeNumber}}</h1>
+
+    <p-footer>
+      <button pButton type="button" label="Stop detect" class="ui-button-warning"></button>
+    </p-footer>
   </p-panel>
 </p-card>

@@ -4,6 +4,11 @@ import { ElectronService } from '../../providers/electron.service';
 
 import { Station, StationType } from '../../../sportident/lib/station';
 
+enum TestMode {
+  BadgeDetect = 1,
+  BadgeReadout = 2
+}
+
 @Component({
   selector: 'app-sportident-diagnostics',
   templateUrl: './sportident-diagnostics.component.html',
@@ -15,6 +20,9 @@ export class SportidentDiagnosticsComponent implements TabbedComponent {
   public ports: any[];
   public selectedPort: any;
   public currentStation: Station;
+
+  public lastBadgeNumber: string;
+  public activeTestMode: TestMode;
 
   constructor(private electronService: ElectronService) { }
 
@@ -33,10 +41,20 @@ export class SportidentDiagnosticsComponent implements TabbedComponent {
       type: StationType.BSM_7_8
     }, this.electronService.serialPort);
 
-    this.currentStation.readProtocolMode()
-      .then(v => {
-        
-      })
-      .catch(x => alert("Error"));    
+    // this.currentStation.readProtocolMode()
+    //   .then(v => {
+
+    //   })
+    //   .catch(x => alert("Error"));    
+  }
+
+  startBadgeDetect(){
+    this.activeTestMode = TestMode.BadgeDetect;
+
+    this.currentStation.badgeDetect()
+      .on("badge", (badgeNumber: string) => {
+        console.log(badgeNumber);
+        this.lastBadgeNumber = badgeNumber;
+      });
   }
 }
