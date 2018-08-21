@@ -25,7 +25,7 @@ export class SICard5Decoder implements IBadgeDecoder{
         this.badgeNumber = this.parseBadgeNumber(data, 6, 17);
 
         this.punches = [];
-        let numPunches = Math.min(data[23], 30);
+        let numPunches = Math.min(data[23] - 1, 30);
         
         let index = PUNCH_BASE_INDEX;
         for(let i = 0; i < numPunches; i++){
