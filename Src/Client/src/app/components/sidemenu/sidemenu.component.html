@@ -1,4 +1,5 @@
-<p>
-  sidemenu works!
-</p>
-<button (click)="openTab()">Öppna tab</button>
+<button pButton type="button" (click)="display = true" icon="pi pi-bars"></button>
+
+<p-sidebar [(visible)]="display" position="left">
+    Menu
+</p-sidebar>

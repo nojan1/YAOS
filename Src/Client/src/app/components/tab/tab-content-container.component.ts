@@ -3,7 +3,7 @@ import { Tab, TabbedComponent, TabService } from '../../providers/tab.service';
 
 @Component({
   selector: 'app-tab-content-container',
-  template: '<div class="full-height"><ng-content></ng-content></div>',
+  template: '<ng-content></ng-content>',
 })
 export class TabContentContainer implements OnInit, OnDestroy {
 

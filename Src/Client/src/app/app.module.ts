@@ -56,6 +56,7 @@ import {SpinnerModule} from 'primeng/spinner';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {DropdownModule} from 'primeng/dropdown';
 import {PanelModule} from 'primeng/panel';
+import {SidebarModule} from 'primeng/sidebar';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -104,7 +105,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SpinnerModule,
     AutoCompleteModule,
     DropdownModule,
-    PanelModule
+    PanelModule,
+    SidebarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HosturlInterceptorService, multi: true },

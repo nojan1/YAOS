@@ -1,0 +1,36 @@
+.outer-container {
+    width:100vw;
+    height:100vh;
+    
+    display: flex;
+    flex-direction: column;
+
+    .top-bar-container{
+        margin:5px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        button {
+            margin-right: 10px;
+        }
+
+        .ui-autocomplete {
+            flex-grow: 1;
+        }
+    }
+
+    .tab-container {
+        margin:0;
+        padding:0;
+        flex-grow:1;
+        display:flex;
+    }
+}
+
+app-tab {
+    width:100%;
+    display:flex;
+    flex-grow:1;
+}

@@ -1,33 +1,10 @@
-<!-- <div class="window">
-  <div class="window-content">
-      <div class="pane-group">
-          <div class="pane-mini sidebar" [hidden]="isMaximized">
-            <app-sidemenu></app-sidemenu>
-          </div>
-          <div class="pane">
-              <div [hidden]="isMaximized">
-                <app-command-palete></app-command-palete>
-              </div>
-
-              <app-tab [isMaximized]="isMaximized"></app-tab>
-          </div>
-        </div>
-  </div>
-</div> -->
-
-<div class="ui-g full-height">
-    <div class="ui-g-1" [hidden]="isMaximized">
+<div class="outer-container">
+    <div class="top-bar-container" [hidden]="isMaximized">
         <app-sidemenu></app-sidemenu>
+        <app-command-palete style="flex-grow:1;"></app-command-palete>
     </div>
-    <div class="ui-g-11 ui-g-nopad">
-        <div class="ui-g-12" [hidden]="isMaximized">
-            <app-command-palete></app-command-palete>
-        </div>
-        <div class="ui-g-12 ui-g-nopad full-height">
-            <app-tab [isMaximized]="isMaximized"></app-tab>
-        </div>
-    </div>
-    <div class="ui-g-12">
-        Footer
+
+    <div class="tab-container">
+        <app-tab [isMaximized]="isMaximized"></app-tab>
     </div>
 </div>
