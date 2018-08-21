@@ -7,7 +7,7 @@ export interface Tab {
   parameters?: any;
 }
 
-export interface TabbedComponent {
+export abstract class TabbedComponent {
   titleChange: (newTitle: string) => void;
 }
 
@@ -25,9 +25,9 @@ export class TabService {
 
   }
 
-  public openTab(componentType: Type<TabbedComponent>, parameters: any = null) {
+  public openTab(componentType: Type<TabbedComponent>, parameters: any = null, title: string = "    ") {
     this.tabs.push({
-      title: "Ny tab",
+      title: title,
       componentType: componentType,
       parameters: parameters
     });

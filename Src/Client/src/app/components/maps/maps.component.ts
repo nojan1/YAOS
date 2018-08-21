@@ -7,10 +7,7 @@ import { EditingComponentBase } from '../editing-component-base';
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.scss']
 })
-export class MapsComponent extends EditingComponentBase<any> implements OnInit, TabbedComponent {
-
-  titleChange: (newTitle: string) => void;
-
+export class MapsComponent extends EditingComponentBase<any> implements OnInit {
   constructor() { 
     super();
   }

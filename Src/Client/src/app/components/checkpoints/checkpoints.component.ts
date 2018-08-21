@@ -9,9 +9,7 @@ import { ServerStateService } from '../../providers/server-state.service';
   templateUrl: './checkpoints.component.html',
   styleUrls: ['./checkpoints.component.scss']
 })
-export class CheckpointsComponent extends EditingComponentBase<WebClient.ICheckpointModel> implements OnInit, TabbedComponent {
-  titleChange: (newTitle: string) => void;
-  
+export class CheckpointsComponent extends EditingComponentBase<WebClient.ICheckpointModel> implements OnInit {
   constructor(private checkpointClient: WebClient.CheckpointClient, private serverStateService: ServerStateService) { 
     super();
   }

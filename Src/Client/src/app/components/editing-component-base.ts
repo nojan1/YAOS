@@ -1,8 +1,10 @@
+import { TabbedComponent } from "../providers/tab.service";
+
 export interface IEditingComponentBase {
     save();
 }
 
-export abstract class EditingComponentBase<T> implements IEditingComponentBase{
+export abstract class EditingComponentBase<T> extends TabbedComponent implements IEditingComponentBase{
     public items: T[] = [];
     public workingCopy: T;
     public inEditMode: boolean = false;

@@ -8,12 +8,12 @@ import { RunnerDetailsComponent } from '../runner-details/runner-details.compone
   templateUrl: './runners.component.html',
   styleUrls: ['./runners.component.scss']
 })
-export class RunnersComponent implements OnInit, TabbedComponent {
-  titleChange: (newTitle: string) => void;
-
+export class RunnersComponent extends TabbedComponent implements OnInit {
   runners: WebClient.IRunnerModel[];
 
-  constructor(private tabService: TabService) { }
+  constructor(private tabService: TabService) { 
+    super();
+  }
 
   ngOnInit() {
     this.runners = [

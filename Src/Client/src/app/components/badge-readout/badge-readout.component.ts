@@ -6,10 +6,10 @@ import { TabbedComponent } from '../../providers/tab.service';
   templateUrl: './badge-readout.component.html',
   styleUrls: ['./badge-readout.component.scss']
 })
-export class BadgeReadoutComponent implements OnInit, TabbedComponent {
-  titleChange: (newTitle: string) => void;
-
-  constructor() { }
+export class BadgeReadoutComponent extends TabbedComponent implements OnInit {
+  constructor() { 
+    super();
+  }
 
   ngOnInit() {
   }

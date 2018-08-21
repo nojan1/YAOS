@@ -21,11 +21,13 @@ export class TabContentContainer implements OnInit, OnDestroy {
     this.componentRef = this.viewContainerRef.createComponent(factory);
 
     this.tab.componentReference = this.componentRef.instance as TabbedComponent;
+    this.tab.componentReference.titleChange = (newTitle) => this.tabService.setTitle(this.tab, newTitle); 
 
-    if(this.tab.parameters)
+    if (this.tab.parameters) {
       Object.keys(this.tab.parameters).forEach(x => {
         this.componentRef.instance[x] = this.tab.parameters[x];
       });
+    }
   }
 
   ngOnDestroy() {

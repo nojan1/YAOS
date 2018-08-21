@@ -6,12 +6,12 @@ import { TabbedComponent } from '../../providers/tab.service';
   templateUrl: './runner-details.component.html',
   styleUrls: ['./runner-details.component.scss']
 })
-export class RunnerDetailsComponent implements OnInit, TabbedComponent {
-  titleChange: (newTitle: string) => void;
-
+export class RunnerDetailsComponent extends TabbedComponent implements OnInit {
   public runnerId: number;
 
-  constructor() { }
+  constructor() {
+    super();
+   }
 
   ngOnInit() {
     console.log(this.runnerId);

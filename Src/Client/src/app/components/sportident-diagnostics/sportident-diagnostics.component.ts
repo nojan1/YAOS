@@ -15,8 +15,7 @@ enum TestMode {
   templateUrl: './sportident-diagnostics.component.html',
   styleUrls: ['./sportident-diagnostics.component.scss']
 })
-export class SportidentDiagnosticsComponent implements TabbedComponent {
-  titleChange: (newTitle: string) => void;
+export class SportidentDiagnosticsComponent extends TabbedComponent {
 
   public ports: any[];
   public selectedPort: any;
@@ -27,7 +26,9 @@ export class SportidentDiagnosticsComponent implements TabbedComponent {
 
   public readouts: IBadgeDecoder[] = [];
 
-  constructor(private electronService: ElectronService) { }
+  constructor(private electronService: ElectronService) { 
+    super();
+  }
 
   ngOnInit() {
     this.electronService.serialPort.list()

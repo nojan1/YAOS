@@ -7,13 +7,12 @@ import { SportidentService } from '../../providers/sportident.service';
   templateUrl: './direct-entry.component.html',
   styleUrls: ['./direct-entry.component.scss']
 })
-export class DirectEntryComponent implements OnInit, TabbedComponent {
-  titleChange: (newTitle: string) => void;
-
-  constructor(private sportidentService: SportidentService) { }
+export class DirectEntryComponent extends TabbedComponent implements OnInit {
+  constructor(private sportidentService: SportidentService) { 
+    super();
+  }
 
   ngOnInit() {
-    
   }
 
 }

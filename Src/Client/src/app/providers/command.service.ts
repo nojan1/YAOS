@@ -25,7 +25,7 @@ export class CommandService {
         let tabCommand = x as IMatchedTabCommand;
         return {
           title: tabCommand.title,
-          action: () => this.tabService.openTab(tabCommand.componentType)
+          action: () => this.tabService.openTab(tabCommand.componentType, null, tabCommand.title)
         };
       }else{
         let genericCommand = x as IMatchedGenericCommand;

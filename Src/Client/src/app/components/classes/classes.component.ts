@@ -9,9 +9,7 @@ import { ServerStateService } from '../../providers/server-state.service';
   templateUrl: './classes.component.html',
   styleUrls: ['./classes.component.scss']
 })
-export class ClassesComponent extends EditingComponentBase<WebClient.IClassWithPropertiesModel> implements OnInit, TabbedComponent {
-  titleChange: (newTitle: string) => void;
-
+export class ClassesComponent extends EditingComponentBase<WebClient.IClassWithPropertiesModel> implements OnInit {
   constructor(private classClient: WebClient.ClassClient, private serverStateService: ServerStateService) {
     super();
   }
