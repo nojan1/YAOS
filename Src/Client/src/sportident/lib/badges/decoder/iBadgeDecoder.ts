@@ -8,6 +8,6 @@ export interface IBadgeDecoder {
     readonly finishTime: Date,
     readonly checkTime: Date,
     readonly punches : Punch[];
-    readonly badgeNumber: string;
+    readonly badgeNumber: number;
     parse(data: Buffer);
 }

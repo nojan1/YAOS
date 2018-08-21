@@ -1,5 +1,5 @@
-
-<h1 class="pull-left">Ports</h1>
+<h1 class="pull-left">
+  Ports</h1>
 <button pButton type="button" class="pull-right" (click)="ngOnInit()" label="Reload" icon="pi pi-refresh"></button>
 
 <div class="clearfix"></div>
@@ -54,7 +54,7 @@
 
   <p-panel header="Test modes" *ngIf="!activeTestMode">
     <p-button label="Badge detect" (click)="startBadgeDetect()"></p-button>
-    <p-button label="Badge readout"></p-button>
+    <p-button label="Badge readout" (click)="startBadgeReadout()"></p-button>
   </p-panel>
 
   <p-panel header="Badge detect test" *ngIf="activeTestMode == 1">
@@ -62,6 +62,54 @@
 
     <p-footer>
       <button pButton type="button" label="Stop detect" class="ui-button-warning"></button>
+    </p-footer>
+  </p-panel>
+
+  <p-panel header="Badge readout test" *ngIf="activeTestMode == 2">
+
+    <div class="ui-g">
+      <div class="ui-g-4">
+        <p-table [value]="readouts">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Badge number</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-readout>
+            <tr>
+              <td>{{readout.badgeNumber}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="ui-g-8">
+        <p-card *ngIf="readouts && readouts.length > 0">
+          <div class="ui-g">
+            <div class="ui-g-6">
+              <p-panel header="Info">
+                <h2>{{readouts[0].badgeNumber}}</h2>
+                <b>Check: </b> {{readouts[0].checkTime | date:'hh:mm:ss' }} <br />
+                <b>Start: </b> {{readouts[0].startTime | date:'hh:mm:ss' }} <br />
+                <b>Finish: </b> {{readouts[0].finishTime | date:'hh:mm:ss' }} <br />
+              </p-panel>
+            </div>
+            <div class="ui-g-6">
+              <p-panel header="Punches">
+                  <ul>
+                      <li *ngFor="let punch of readouts[0].punches">
+                        <b>{{punch.code}}</b> - {{punch.timestamp | date:'hh:mm:ss'}}
+                      </li>
+                    </ul>
+              </p-panel>
+              </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+    <p-footer>
+      <button pButton type="button" label="Stop readout" class="ui-button-warning"></button>
     </p-footer>
   </p-panel>
 </p-card>

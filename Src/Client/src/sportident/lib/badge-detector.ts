@@ -2,6 +2,7 @@ import { Transform } from "stream";
 import { Station } from "./station";
 import { parseResponse } from "./common";
 import { ExtendedCommand, ETX } from "./constants";
+import { buildBadgeNumber } from "./badges/decoder/SICard-5-decoder";
 
 export class Detector extends Transform {
 
@@ -20,10 +21,7 @@ export class Detector extends Transform {
         if (response) {
             switch (response.command) {
                 case ExtendedCommand.SICARD_5_DETECTED:
-                    let baseNumber = [0,0,200000,300000,400000][response.data[1]]
-                    let subNumber = response.data.readUInt16BE(2);
-
-                    this.emit("badge", baseNumber + subNumber);
+                    this.emit("badge", buildBadgeNumber(response.data[1], response.data.readUInt16BE(2)));
                     break;
                 case ExtendedCommand.SICARD_6_DETECTED:
                 case ExtendedCommand.SICARD_8_9_DETECTED:

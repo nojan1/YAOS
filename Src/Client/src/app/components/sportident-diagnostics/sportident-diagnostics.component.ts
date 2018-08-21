@@ -3,6 +3,7 @@ import { TabbedComponent } from '../../providers/tab.service';
 import { ElectronService } from '../../providers/electron.service';
 
 import { Station, StationType } from '../../../sportident/lib/station';
+import { IBadgeDecoder } from '../../../sportident/lib/badges/decoder/iBadgeDecoder';
 
 enum TestMode {
   BadgeDetect = 1,
@@ -24,6 +25,8 @@ export class SportidentDiagnosticsComponent implements TabbedComponent {
   public lastBadgeNumber: string;
   public activeTestMode: TestMode;
 
+  public readouts: IBadgeDecoder[] = [];
+
   constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
@@ -41,11 +44,28 @@ export class SportidentDiagnosticsComponent implements TabbedComponent {
       type: StationType.BSM_7_8
     }, this.electronService.serialPort);
 
+    this.currentStation.protocolMode = {
+      autoSendOut: 0,
+      extendedProtocol : 1,
+      handshake : 1,
+      passwordAccess: 0,
+      readSICardAfterPunch: 0
+    };
+
     // this.currentStation.readProtocolMode()
     //   .then(v => {
 
     //   })
     //   .catch(x => alert("Error"));    
+  }
+
+  startBadgeReadout(){
+    this.activeTestMode = TestMode.BadgeReadout;
+
+    this.currentStation.cardReadout()
+      .on("readout", (decoder: IBadgeDecoder) => {
+        this.readouts.unshift(decoder);
+      });
   }
 
   startBadgeDetect(){

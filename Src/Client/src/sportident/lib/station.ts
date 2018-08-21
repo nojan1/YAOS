@@ -91,6 +91,11 @@ export class Station {
     public get protocolMode(){ return this._protocolMode; }
     public get serialPort(){ return this._serialPort; }
 
+    //TODO: Remove me!
+    public set protocolMode(x: ProtocolMode){
+        this._protocolMode = x;
+    }
+
     constructor(private comName: string, private stationInfo: StationInfo, serialPort: any){
         this._serialPort = new serialPort(comName, {
             baudRate: stationInfo.baudRate,

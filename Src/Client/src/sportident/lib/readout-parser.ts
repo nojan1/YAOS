@@ -52,7 +52,7 @@ export class Readout extends Transform {
                     let decoded = this.badgeReader.getDecodedIfDone();
                     if(decoded)
                     {
-                        this.push(decoded);
+                        this.emit("readout", decoded);
                         this.badgeReader = null;
                     }
                 }else{
