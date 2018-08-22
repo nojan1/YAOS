@@ -28,7 +28,7 @@ export interface ProtocolMode {
     readSICardAfterPunch: number
 }
 
-export function detectBaseStation(comName: string, serialPort: any) : Promise<StationInfo> {
+export function detectBaseStation(comName: string, serialPort: any): Promise<StationInfo> {
     return new Promise((resolve, reject) => {
         let port = new serialPort(comName, {
             baudRate: BaudRate.B38400,
@@ -39,9 +39,9 @@ export function detectBaseStation(comName: string, serialPort: any) : Promise<St
 
         port.open();
         sendExtendedCommand(port, ExtendedCommand.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION]);
-        
+
         let response = port.read() as Buffer;
-        if(response && response[0] != NAK){
+        if (response && response[0] != NAK) {
             port.close();
 
             resolve({
@@ -58,7 +58,7 @@ export function detectBaseStation(comName: string, serialPort: any) : Promise<St
 
         response = port.read() as Buffer;
 
-        if(response && response[0] != NAK){
+        if (response && response[0] != NAK) {
             port.close();
 
             resolve({
@@ -71,8 +71,7 @@ export function detectBaseStation(comName: string, serialPort: any) : Promise<St
         response = port.read() as Buffer;
         port.close();
 
-        if(response)
-        {
+        if (response) {
             resolve({
                 type: StationType.BSM_3_4_6,
                 baudRate: BaudRate.B4800
@@ -88,15 +87,15 @@ export class Station {
     private _serialPort: SerialPort;
     private _protocolMode: ProtocolMode;
 
-    public get protocolMode(){ return this._protocolMode; }
-    public get serialPort(){ return this._serialPort; }
+    public get protocolMode() { return this._protocolMode; }
+    public get serialPort() { return this._serialPort; }
 
     //TODO: Remove me!
-    public set protocolMode(x: ProtocolMode){
+    public set protocolMode(x: ProtocolMode) {
         this._protocolMode = x;
     }
 
-    constructor(private comName: string, private stationInfo: StationInfo, serialPort: any){
+    constructor(private comName: string, private stationInfo: StationInfo, serialPort: any) {
         this._serialPort = new serialPort(comName, {
             baudRate: stationInfo.baudRate,
             dataBits: 8,
@@ -114,7 +113,7 @@ export class Station {
             sendExtendedCommand(this._serialPort, ExtendedCommand.SET_BAUD_RATE, [speedByte]);
 
             let response = readResponse(this._serialPort);
-            if(!response || response.data[0] != speedByte)
+            if (!response || response.data[0] != speedByte)
                 reject();
 
             this.stationInfo.baudRate = baudRate;
@@ -126,33 +125,39 @@ export class Station {
         });
     }
 
-    public readProtocolMode() : Promise<ProtocolMode> {
+    public readProtocolMode(): Promise<ProtocolMode> {
         return new Promise((resolve, reject) => {
-            sendExtendedCommand(this._serialPort, ExtendedCommand.GET_SYSTEM_VALUE, [0x74, 0x01]);
-            
-            let response = readResponse(this._serialPort);
-            if(!response){
-                reject();
+            let retries = 0;
+
+            while (retries++ < 5) {
+                sendExtendedCommand(this._serialPort, ExtendedCommand.GET_SYSTEM_VALUE, [0x70, 0x06]);
+
+                let response = readResponse(this._serialPort);
+                if (!response) {
+                    continue; //Try again
+                }
+
+                let protocolConfigurationByte = response.data[0];
+                this._protocolMode = {
+                    extendedProtocol: (protocolConfigurationByte >> 0) & 0x01,
+                    autoSendOut: (protocolConfigurationByte >> 1) & 0x01,
+                    handshake: (protocolConfigurationByte >> 2) & 0x01,
+                    passwordAccess: (protocolConfigurationByte >> 4) & 0x01,
+                    readSICardAfterPunch: (protocolConfigurationByte >> 7) & 0x01
+                };
+
+                resolve(this.protocolMode);
                 return;
             }
 
-            let protocolConfigurationByte = response.data[0];
-            this._protocolMode = {
-                extendedProtocol: (protocolConfigurationByte >> 0) & 0x01,
-                autoSendOut: (protocolConfigurationByte >> 1) & 0x01,
-                handshake: (protocolConfigurationByte >> 2) & 0x01,
-                passwordAccess: (protocolConfigurationByte >> 4) & 0x01,
-                readSICardAfterPunch: (protocolConfigurationByte >> 7) & 0x01
-            };
-
-            resolve(this.protocolMode);
+            reject();
         });
     }
 
-    public cardReadout() : Readout{
+    public cardReadout(): Readout {
         let readoutParser = new Readout(this);
         this._serialPort.pipe(readoutParser);
-        
+
         return readoutParser;
     }
 
@@ -161,5 +166,9 @@ export class Station {
         this._serialPort.pipe(detectParser);
 
         return detectParser;
+    }
+
+    public destroy(){
+        this._serialPort.destroy();
     }
 }

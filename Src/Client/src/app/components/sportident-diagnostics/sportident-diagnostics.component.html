@@ -25,7 +25,11 @@
 
 <hr />
 
-<p-dropdown [options]="ports" [(ngModel)]="selectedPort" (onChange)="onPortSelect()" optionLabel="comName"></p-dropdown>
+<p-dropdown [options]="ports" [(ngModel)]="selectedPort" (onChange)="onPortSelect()" optionLabel="comName" autoDisplayFirst="false" placeholder="Select port"></p-dropdown>
+
+<p-dialog header="Connection failed" [(visible)]="connectionError">
+  There was an error connecting and getting protocol mode information from station
+</p-dialog>
 
 <p-card *ngIf="currentStation">
   <p-panel header="ProtocolMode" *ngIf="currentStation.protocolMode">

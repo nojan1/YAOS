@@ -17,6 +17,7 @@ enum TestMode {
 })
 export class SportidentDiagnosticsComponent extends TabbedComponent {
 
+  public connectionError: boolean;
   public ports: any[];
   public selectedPort: any;
   public currentStation: Station;
@@ -57,7 +58,13 @@ export class SportidentDiagnosticsComponent extends TabbedComponent {
     //   .then(v => {
 
     //   })
-    //   .catch(x => alert("Error"));    
+    //   .catch(x => {
+    //     this.selectedPort = null;
+    //     this.connectionError = true;
+
+    //     this.currentStation.destroy();
+    //     this.currentStation = null;
+    //   });    
   }
 
   startBadgeReadout(){

@@ -1,5 +1,5 @@
 import * as SerialPort from 'serialport';
-import { STX, ETX, Command, ExtendedCommand, NAK } from './constants';
+import { STX, ETX, Command, ExtendedCommand, NAK, ACK } from './constants';
 
 export interface Response {
     stationCode: number,
@@ -55,33 +55,40 @@ export function calculateCRC(buffer: Buffer): number {
     return tmp & 0xFFFF;
 }
 
+export function sendAck(port: SerialPort){
+    let buffer = new Buffer(1);
+    buffer[0] = ACK;
+
+    port.write(buffer);
+    port.drain();
+}
+
 export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, parameters?:number[]) {
-    let totalLength =  8 + (parameters ? parameters.length : 0);
     let protocolLength = parameters ? parameters.length : 0;
 
     if(protocolLength > 255)
         throw new Error("Message length longer then 255 is not supported");
 
-    let buffer = new Buffer(totalLength);
+    let workingBuffer = [];
 
-    buffer[0] = 0xFF;
-    buffer[1] = STX;
-    buffer[2] = STX;
-    buffer[3] = command;
-    buffer[4] = protocolLength;
+    workingBuffer.push(STX);
+    workingBuffer.push(command);
+    workingBuffer.push(protocolLength);
 
-    let i = 5;
     if(parameters){
-        parameters.forEach((v,z) => buffer[i++] = v);
+        parameters.forEach((v,z) => workingBuffer.push(v));
     }
 
-    let crc = calculateCRC(buffer.slice(3, totalLength - 3));
-    buffer.writeUInt16BE(crc, i);
+    let buffer = Buffer.concat([Buffer.from(workingBuffer), Buffer.alloc(3)]);
 
-    buffer[totalLength - 1] = ETX;
+    let crcSubBuffer = buffer.slice(buffer.indexOf(STX) + 1, buffer.length - 3);
+    let crc = calculateCRC(crcSubBuffer);
+    buffer.writeUInt16BE(crc, buffer.length - 3);
+
+    buffer[buffer.length - 1] = ETX;
 
     port.write(buffer);
-    port.drain(() => console.log("drain complete"));
+    port.drain();
 }
 
 export function sendCommand(port: SerialPort, command: Command, parameters?:number[]) {
@@ -107,7 +114,7 @@ export function readResponse(port: SerialPort) : Response{
 
     do{
         buffer = port.read() as Buffer;
-    }while(!buffer && retryCount++ < 10);
+    }while(!buffer && retryCount++ < 50);
 
     if(!buffer)
         return null;
@@ -116,6 +123,14 @@ export function readResponse(port: SerialPort) : Response{
 }
 
 export function parseResponse(buffer: Buffer) : Response {
+    if(buffer.length > 0 && buffer[0] == NAK){
+        return {
+            command: NAK,
+            stationCode: -1,
+            data: null
+        };
+    }
+
     let stxIndex = 0;
     while(buffer[stxIndex] != STX && stxIndex < buffer.length)
         stxIndex++;
@@ -131,6 +146,14 @@ export function parseResponse(buffer: Buffer) : Response {
 
     if(parsedBuffer[0] != STX || parsedBuffer[parsedBuffer.length - 1] != ETX)
         return null;
+
+    let myCrc = calculateCRC(parsedBuffer.slice(1, parsedBuffer.length - 3));
+    let theirCrc = buffer.readUInt16BE(parsedBuffer.length - 3);
+
+    if(myCrc != theirCrc){
+        console.warn("Got message with incorrect CRC. Expected: " + myCrc + " but got " + theirCrc);
+        return null;
+    }
 
     return {
         command: parsedBuffer[1],

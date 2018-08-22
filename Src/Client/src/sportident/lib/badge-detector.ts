@@ -1,6 +1,6 @@
 import { Transform } from "stream";
 import { Station } from "./station";
-import { parseResponse } from "./common";
+import { parseResponse, sendAck } from "./common";
 import { ExtendedCommand, ETX } from "./constants";
 import { buildBadgeNumber } from "./badges/decoder/SICard-5-decoder";
 
@@ -22,10 +22,12 @@ export class Detector extends Transform {
             switch (response.command) {
                 case ExtendedCommand.SICARD_5_DETECTED:
                     this.emit("badge", buildBadgeNumber(response.data[1], response.data.readUInt16BE(2)));
+                    sendAck(this.station.serialPort);
                     break;
                 case ExtendedCommand.SICARD_6_DETECTED:
                 case ExtendedCommand.SICARD_8_9_DETECTED:
                     this.emit("badge", response.data.readUInt32BE(0));
+                    sendAck(this.station.serialPort);
                     break;
             }
 
