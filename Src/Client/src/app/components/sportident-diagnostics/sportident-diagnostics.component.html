@@ -65,7 +65,7 @@
     <h1>{{lastBadgeNumber}}</h1>
 
     <p-footer>
-      <button pButton type="button" label="Stop detect" class="ui-button-warning"></button>
+      <button pButton type="button" label="Stop detect" class="ui-button-warning" (click)="stopTestMode()"></button>
     </p-footer>
   </p-panel>
 
@@ -113,7 +113,7 @@
     </div>
 
     <p-footer>
-      <button pButton type="button" label="Stop readout" class="ui-button-warning"></button>
+      <button pButton type="button" label="Stop readout" class="ui-button-warning" (click)="stopTestMode()"></button>
     </p-footer>
   </p-panel>
 </p-card>
