@@ -11,10 +11,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./competition-selection.component.scss']
 })
 export class CompetitionSelectionComponent implements OnInit {
-  public competitions: WebClient.CompetitionModel[] = [];
+  public competitions: WebClient.ICompetitionModel[] = [];
   
   public useLocalServer: boolean = true;
   public serverAddress: string = "";
+
+  public displayNewCompetitionDialog: boolean;
+  public newCompetition: WebClient.ICompetitionModel;
 
   constructor(private serverStateService: ServerStateService,
     private competitionClient: WebClient.CompetitionClient,

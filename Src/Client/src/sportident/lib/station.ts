@@ -1,9 +1,11 @@
 import * as SerialPort from 'serialport';
-import { sendCommand, sendExtendedCommand, readResponse } from './common';
+import { sendCommand, sendExtendedCommand, readResponse, sleep } from './common';
 import { ExtendedCommand, NAK, Command, MasterStationCommunicationMode } from './constants';
 import { resolve } from 'url';
 import { Readout } from './readout-parser';
 import { Detector } from './badge-detector';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import { Transform } from 'stream';
 
 export enum BaudRate {
     B4800 = 4800,
@@ -29,84 +31,81 @@ export interface ProtocolMode {
 }
 
 export function detectBaseStation(comName: string, serialPort: any): Promise<StationInfo> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let port = new serialPort(comName, {
             baudRate: BaudRate.B38400,
             dataBits: 8,
             parity: "none",
             stopBits: 1,
-            autoOpen: false
+            autoOpen: false,
         });
 
         port.on("error", console.error);
 
-        port.open(x => {
+        port.open(async x => {
             if (x) {
                 console.error(x);
                 reject("Failed to open port");
                 return;
             }
 
-            sendExtendedCommand(port, ExtendedCommand.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION])
-                .then(() => {
-                    let response = port.read() as Buffer;
-                    if (response && response[0] != NAK) {
-                        port.close();
+            await sendExtendedCommand(port, ExtendedCommand.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION], true);
+            await sleep(700);
 
-                        resolve({
-                            type: StationType.BSM_7_8,
-                            baudRate: BaudRate.B38400
-                        });
+            let response = port.read() as Buffer;
+            if (response && response[0] != NAK) {
+                port.close();
 
-                        return;
-                    }
+                resolve({
+                    type: StationType.BSM_7_8,
+                    baudRate: BaudRate.B38400
+                });
 
-                    port.update({
+                return;
+            }
+
+            port.update({
+                baudRate: BaudRate.B4800
+            }, async x => {
+                if (x) {
+                    console.error(x);
+                    reject("Failed to change baudrate");
+                    return;
+                }
+
+                await sendExtendedCommand(port, ExtendedCommand.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION], true);
+                await sleep(700);
+
+                response = port.read() as Buffer;
+
+                if (response && response[0] != NAK) {
+                    port.close();
+
+                    resolve({
+                        type: StationType.BSM_7_8,
                         baudRate: BaudRate.B4800
-                    }, x => {
-                        if (x) {
-                            console.error(x);
-                            reject("Failed to change baudrate");
-                            return;
-                        }
-
-                        sendExtendedCommand(port, ExtendedCommand.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION])
-                            .then(() => {
-                                response = port.read() as Buffer;
-
-                                if (response && response[0] != NAK) {
-                                    port.close();
-
-                                    resolve({
-                                        type: StationType.BSM_7_8,
-                                        baudRate: BaudRate.B4800
-                                    });
-
-                                    return;
-                                }
-
-                                sendCommand(port, Command.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION])
-                                    .then(() => {
-                                        response = port.read() as Buffer;
-                                        port.close();
-
-                                        if (response) {
-                                            resolve({
-                                                type: StationType.BSM_3_4_6,
-                                                baudRate: BaudRate.B4800
-                                            });
-
-                                            return;
-                                        }
-
-                                        reject("No reply from station");
-                                    })
-                                    .catch(x => reject(x));
-                            })
-                            .catch(x => reject(x))
                     });
-                })
-                .catch(x => reject(x));
+
+                    return;
+                }
+
+                await sendCommand(port, Command.SET_MS_MODE, [MasterStationCommunicationMode.DIRECT_COMMUNICATION]);
+                await sleep(700);
+
+                response = port.read() as Buffer;
+                port.close();
+
+                if (response) {
+                    resolve({
+                        type: StationType.BSM_3_4_6,
+                        baudRate: BaudRate.B4800
+                    });
+
+                    return;
+                }
+
+                reject("No reply from station");
+            });
         });
     });
 }
@@ -136,23 +135,20 @@ export class Station {
     }
 
     public changeSpeed(baudRate: BaudRate) {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             let speedByte = baudRate == BaudRate.B4800 ? 0x01 : 0x00;
 
-            sendExtendedCommand(this._serialPort, ExtendedCommand.SET_BAUD_RATE, [speedByte])
-                .then(() => {
-                    let response = readResponse(this._serialPort);
-                    if (!response || response.data[0] != speedByte) {
-                        reject("Incorrect speed in reply or empty response");
-                        return;
-                    }
+            await sendExtendedCommand(this._serialPort, ExtendedCommand.SET_BAUD_RATE, [speedByte]);
+            let response = readResponse(this._serialPort);
+            if (!response || response.data[0] != speedByte) {
+                reject("Incorrect speed in reply or empty response");
+                return;
+            }
 
-                    this.stationInfo.baudRate = baudRate;
-                    this._serialPort.update({
-                        baudRate: baudRate
-                    }, x => x ? reject(x) : resolve());
-                })
-                .catch(x => reject(x));
+            this.stationInfo.baudRate = baudRate;
+            this._serialPort.update({
+                baudRate: baudRate
+            }, x => x ? reject(x) : resolve());
         });
     }
 
@@ -193,6 +189,10 @@ export class Station {
         this._serialPort.pipe(detectParser);
 
         return detectParser;
+    }
+
+    public stop(transform: Transform){
+        this._serialPort.unpipe(transform);
     }
 
     public destroy() {

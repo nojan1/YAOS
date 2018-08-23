@@ -63,7 +63,7 @@ export function sendAck(port: SerialPort) {
     port.drain();
 }
 
-export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, parameters?: number[]) {
+export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, parameters?: number[], sendWakeup?: boolean) {
     return new Promise((resolve, reject) => {
         let protocolLength = parameters ? parameters.length : 0;
 
@@ -74,8 +74,11 @@ export function sendExtendedCommand(port: SerialPort, command: ExtendedCommand, 
 
         let workingBuffer = [];
 
-        workingBuffer.push(0xFF);
-        workingBuffer.push(STX);
+        if (sendWakeup) {
+            workingBuffer.push(0xFF);
+            workingBuffer.push(STX);
+        }
+
         workingBuffer.push(STX);
         workingBuffer.push(command);
         workingBuffer.push(protocolLength);
@@ -175,4 +178,8 @@ export function parseResponse(buffer: Buffer): Response {
         data: parsedBuffer.slice(5, parsedBuffer.length - 3),
         stationCode: parsedBuffer.readUInt16BE(3)
     };
+}
+
+export function sleep(ms: number){
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

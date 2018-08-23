@@ -4,6 +4,7 @@ import { ElectronService } from '../../providers/electron.service';
 
 import { Station, StationType, detectBaseStation, BaudRate } from '../../../sportident/lib/station';
 import { IBadgeDecoder } from '../../../sportident/lib/badges/decoder/iBadgeDecoder';
+import { Transform } from 'stream';
 
 enum TestMode {
   BadgeDetect = 1,
@@ -27,6 +28,8 @@ export class SportidentDiagnosticsComponent extends TabbedComponent {
 
   public readouts: IBadgeDecoder[] = [];
 
+  private testModeTransform: Transform;
+
   constructor(private electronService: ElectronService) {
     super();
   }
@@ -45,16 +48,19 @@ export class SportidentDiagnosticsComponent extends TabbedComponent {
     //   .then(x => {
     //     this.currentStation = new Station(this.selectedPort.comName, x, this.electronService.serialPort);
 
-    //     // this.currentStation.readProtocolMode()
-    // //   .then(v => {
-
-    // //   })
-    // //   .catch(x => {
-    // //     this.connectionError = true;
-      // this.reset();
-    // //   });    
+    //     this.currentStation.readProtocolMode()
+    //       .then(v => {
+    //         console.log("Read protocol mode")
+    //       })
+    //       .catch(x => {
+    //         this.connectionError = true;
+    //         this.reset();
+    //       });
     //   })
-    //   .catch(x => console.error(x));
+    //   .catch(x => {
+    //     console.error(x);
+    //     this.reset();
+    //   });
 
     this.currentStation = new Station(this.selectedPort.comName, {
       baudRate: BaudRate.B38400,
@@ -76,13 +82,13 @@ export class SportidentDiagnosticsComponent extends TabbedComponent {
     //   })
     //   .catch(x => console.error(x));
 
-    // this.currentStation.protocolMode = {
-    //   autoSendOut: 0,
-    //   extendedProtocol : 1,
-    //   handshake : 1,
-    //   passwordAccess: 0,
-    //   readSICardAfterPunch: 0
-    // };
+    this.currentStation.protocolMode = {
+      autoSendOut: 0,
+      extendedProtocol : 1,
+      handshake : 1,
+      passwordAccess: 0,
+      readSICardAfterPunch: 0
+    };
 
     // this.currentStation.readProtocolMode()
     //   .then(v => {
@@ -91,14 +97,14 @@ export class SportidentDiagnosticsComponent extends TabbedComponent {
     //   .catch(x => {
     //     console.error(x);
     //     this.connectionError = true;
-          // this.reset();
+    // this.reset();
     //   });    
   }
 
   startBadgeReadout() {
     this.activeTestMode = TestMode.BadgeReadout;
 
-    this.currentStation.cardReadout()
+    this.testModeTransform = this.currentStation.cardReadout()
       .on("readout", (decoder: IBadgeDecoder) => {
         this.readouts.unshift(decoder);
       });
@@ -107,21 +113,24 @@ export class SportidentDiagnosticsComponent extends TabbedComponent {
   startBadgeDetect() {
     this.activeTestMode = TestMode.BadgeDetect;
 
-    this.currentStation.badgeDetect()
+    this.testModeTransform = this.currentStation.badgeDetect()
       .on("badge", (badgeNumber: string) => {
         console.log(badgeNumber);
         this.lastBadgeNumber = badgeNumber;
       });
   }
 
-  stopTestMode(){
+  stopTestMode() {
+    this.currentStation.stop(this.testModeTransform);
     this.activeTestMode = null;
   }
 
   private reset() {
     this.selectedPort = null;
 
-    this.currentStation.destroy();
-    this.currentStation = null;
+    if (this.currentStation) {
+      this.currentStation.destroy();
+      this.currentStation = null;
+    }
   }
 }
