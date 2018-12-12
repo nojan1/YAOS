@@ -9,7 +9,7 @@
 
     display:flex;    
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
 
     .title {
         font-size:3em;
@@ -30,12 +30,21 @@
     table{
         overflow-y: scroll;
         flex-grow: 1;
-        flex-basis: auto;
+        flex-basis: 100%;
+        justify-self: stretch;
 
         tbody{
             tr {
                 cursor: pointer;
             }
         }
+    }
+
+    .button-container {
+        justify-self: flex-end;
+        height:30px;
+
+        display:flex;
+        justify-content: flex-end;
     }
 }

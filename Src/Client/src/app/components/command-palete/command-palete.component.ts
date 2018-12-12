@@ -11,7 +11,7 @@ export class CommandPaleteComponent implements OnInit {
 
   searchString: string;
 
-  @ViewChild("paleteInput") paleteInputField: ElementRef;
+  @ViewChild("commandPalete") paleteInputField: any;
   outputOpen: boolean = false;
   commandItems: CommandItem[] = [];
   activeCommandItem: CommandItem;
@@ -20,8 +20,7 @@ export class CommandPaleteComponent implements OnInit {
 
   ngOnInit() {
     this.commandService.triggerCommandPalate = () => { 
-      this.paleteInputField.nativeElement.focus();
-      this.onActivate();
+      this.paleteInputField.inputEL.nativeElement.focus();
     }
   }
 
@@ -36,53 +35,4 @@ export class CommandPaleteComponent implements OnInit {
     commandItem.action(this.injector);
     this.searchString = "";
   }
-
-  onActivate(){
-    this.outputOpen = true;
-  }
-
-  onInput(event: any){
-    this.activeCommandItem = null;
-    this.commandItems = this.commandService.match(event.target.value);
-  }
-
-  onKeyUp(event: any) {
-    if (event.key == "Escape") {
-      this.closeOutput();
-    } else if (event.key == "ArrowUp") {
-      this.changeCommandItem(-1);
-      event.stopPropagation();
-    } else if (event.key == "ArrowDown") {
-      this.changeCommandItem(+1);
-      event.stopPropagation();
-    } else if (event.key == "Enter" && this.activeCommandItem) {
-      this.selectCommandItem(this.activeCommandItem);
-    }
-  }
-
-  changeCommandItem(directionNumber: number) {
-    if (this.commandItems.length == 0)
-      return;
-
-    let currentIndex = (!this.activeCommandItem) ? -1
-      : this.commandItems.indexOf(this.activeCommandItem);
-
-    let index = (currentIndex + directionNumber) % this.commandItems.length;
-    this.activeCommandItem = this.commandItems[index];
-  }
-
-  selectCommandItem(commandItem: CommandItem){
-    commandItem.action(this.injector);
-    this.paleteInputField.nativeElement.value = "";
-    
-    this.closeOutput();
-  }
-
-  closeOutput() {
-    
-    this.paleteInputField.nativeElement.blur();
-    this.activeCommandItem = null;
-    this.outputOpen = false;
-  }
-
 }

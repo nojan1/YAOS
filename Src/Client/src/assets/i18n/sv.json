@@ -9,7 +9,10 @@
             "TABLE_HEADING_NAME": "Tävling",
             "VALIDATION_FAIL": "Kunde inte ansluta till servern",
             "VALIDATION_WRONGVERSION": "Servern kör fel version",
-            "VALIDATION_SUCCESS": "Ansluten till servern"
+            "VALIDATION_SUCCESS": "Ansluten till servern",
+            "NEW_COMPETITION": "Ny tävling",
+            "IMPORT_COMPETITION": "Importera från Eventor",
+            "COMPETITION_NAME": "Tävlingens namn"
         },
         "CHECKPOINTS": {
             "CODE": "Kodsiffra",
@@ -38,7 +41,8 @@
             "RUNNER_NAME": "Namn",
             "CLUB_NAME": "Förening",
             "BADGE_NUMBER": "Bricknummer",
-            "CLASS": "Klass"
+            "CLASS": "Klass",
+            "BASIC_INFO": "Basinfo"
         }
     },
     "PALETE": {
@@ -49,7 +53,7 @@
         "MAPS_ADMIN": "Administrera banor",
         "CLASSES_ADMIN": "Administrera klasser",
         "RUNNERS": "Löpare",
-        "ADD_RUNNER": "Lägg till läpare",
+        "ADD_RUNNER": "Lägg till löpare",
         "BADGE_READOUT": "Läs in löparbrickor",
         "DIRECT_ENTRY": "Direktanmälan",
         "SPORTIDENT_DIAG": "Sportidentdiagnostik",

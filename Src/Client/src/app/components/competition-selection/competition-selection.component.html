@@ -6,9 +6,9 @@
 
     <div class="controls">
       <form (ngSubmit)="submitServer()" #serverForm="ngForm">
-        <p-checkbox name="useLocalServer" [(ngModel)]="useLocalServer" (ngModelChange)="useLocalServerChanged()" binary="true" label="{{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate:param}} "></p-checkbox>
+        <p-checkbox name="useLocalServer" [(ngModel)]="useLocalServer" (ngModelChange)="useLocalServerChanged()" binary="true" label="{{'TABS.COMPETITION_SELECTION.USE_LOCAL_SERVER' | translate}} "></p-checkbox>
 
-        <p-card title="{{'TABS.COMPETITION_SELECTION.SERVER_ADDRESS' | translate:param}}" [hidden]="useLocalServer" class="spacing-top">
+        <p-card title="{{'TABS.COMPETITION_SELECTION.SERVER_ADDRESS' | translate}}" [hidden]="useLocalServer" class="spacing-top">
           <div class="ui-inputgroup">
             <input type="text" pInputText placeholder="Host:Port" [(ngModel)]="serverAddress" name="_serverAddress" required pattern="^[\w\d.-]+(:\d+|)$">
             <button pButton type="button" icon="pi pi-cloud-download" class="ui-button-primary" [disabled]="!serverForm.form.valid"></button>
@@ -17,17 +17,36 @@
       </form>
     </div>
 
-    <p-table [value]="competitions">
+    <p-table [value]="competitions" [scrollable]="true" scrollHeight="100%">
       <ng-template pTemplate="header">
         <tr>
-          <th>{{'TABS.COMPETITION_SELECTION.TABLE_HEADING_NAME' | translate:param}}</th>
+          <th>{{'TABS.COMPETITION_SELECTION.TABLE_HEADING_NAME' | translate}}</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-competition>
         <tr (click)="loadCompetition(competition)" class="clickable">
-          <td>{{competition.name}}</td>
+          <td>{{competition.name}}</td> 
         </tr>
       </ng-template>
     </p-table>
 
+    <div class="button-container">
+      <button pButton label="{{'TABS.COMPETITION_SELECTION.NEW_COMPETITION' | translate}}" icon="pi pi-plus" (click)="displayNewCompetitionDialog = true"></button>
+      <button pButton label="{{'TABS.COMPETITION_SELECTION.IMPORT_COMPETITION' | translate}}" icon="pi pi-download"></button>
+    </div>
+
   </div>
+</div>
+
+<p-dialog header="{{'TABS.COMPETITION_SELECTION.NEW_COMPETITION' | translate}}" [(visible)]="displayNewCompetitionDialog">
+  <form>
+    <span class="ui-float-label push-down">
+      <input id="float-input" type="text" size="30" pInputText>
+      <label for="float-input">{{'TABS.COMPETITION_SELECTION.COMPETITION_NAME' | translate}}</label>
+    </span>
+  </form>
+
+  <p-footer>
+    <button type="button" pButton icon="pi pi-save" (click)="displayNewCompetitionDialog=false" label="{{'TABS.COMPETITION_SELECTION.NEW_COMPETITION' | translate}}"></button>
+  </p-footer>
+</p-dialog>

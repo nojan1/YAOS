@@ -1,3 +1,10 @@
-<p>
-  runner-details works!
-</p>
+<p-panel header="{{'TABS.RUNNERS.BASIC_INFO' | translate}}">
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">{{'TABS.RUNNERS.RUNNER_NAME' | translate }}</span>
+    <input type="text" pInputText />
+  </div>
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">{{'TABS.RUNNERS.CLUB_NAME' | translate }}</span>
+    <p-autoComplete [(ngModel)]="runner.club" [suggestions]="clubs" field="name" (completeMethod)="onClubSearch($event)"></p-autoComplete>
+  </div>
+</p-panel>

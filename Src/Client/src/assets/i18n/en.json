@@ -9,7 +9,10 @@
             "TABLE_HEADING_NAME": "Competition name",
             "VALIDATION_FAIL": "Unable to connect to server",
             "VALIDATION_WRONGVERSION": "Server is running the wrong software version",
-            "VALIDATION_SUCCESS": "Connected to server"
+            "VALIDATION_SUCCESS": "Connected to server",
+            "NEW_COMPETITION": "New competition",
+            "IMPORT_COMPETITION": "Import from eventor",
+            "COMPETITION_NAME": "The name of the competition"
         },
         "CHECKPOINTS": {
             "CODE": "Station code",
@@ -38,7 +41,8 @@
             "RUNNER_NAME": "Name",
             "CLUB_NAME": "Club",
             "BADGE_NUMBER": "Badge number",
-            "CLASS": "Class"
+            "CLASS": "Class",
+            "BASIC_INFO": "Basic info"
         }
     },
     "PALETE": {

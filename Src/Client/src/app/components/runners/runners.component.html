@@ -1,27 +1,26 @@
-
-<table class="table">
-  <thead>
+<p-table [value]="runners" [paginator]="true" [rows]="10" [resizableColumns]="true">
+  <ng-template pTemplate="header" let-columns>
     <tr>
-      <th>
-        {{'TABS.RUNNERS.RUNNER_NAME' | translate:param}}
+      <th pResizableColumn>
+        {{'TABS.RUNNERS.RUNNER_NAME' | translate}}
       </th>
-      <th>
-        {{'TABS.RUNNERS.CLUB_NAME' | translate:param}}
+      <th pResizableColumn>
+        {{'TABS.RUNNERS.CLUB_NAME' | translate}}
       </th>
-      <th>
-        {{'TABS.RUNNERS.BADGE_NUMBER' | translate:param}}
+      <th pResizableColumn>
+        {{'TABS.RUNNERS.BADGE_NUMBER' | translate}}
       </th>
-      <th>
-        {{'TABS.RUNNERS.CLASS' | translate:param}}
+      <th pResizableColumn>
+        {{'TABS.RUNNERS.CLASS' | translate}}
       </th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let runner of runners" (click)="openRunner(runner)">
-      <td>{{runner.name}}</td>
-      <td>{{runner.club}}</td>
-      <td>{{runner.badge?.number}}</td>
-      <td>{{runner.class?.name}}</td>
-    </tr> 
-  </tbody>
-</table>
+  </ng-template>
+  <ng-template pTemplate="body" let-runner>
+      <tr (click)="openRunner(runner)">
+        <td class="ui-resizable-column">{{runner.name}}</td>
+        <td class="ui-resizable-column">{{runner.club}}</td>
+        <td class="ui-resizable-column">{{runner.badge?.number}}</td>
+        <td class="ui-resizable-column">{{runner.class?.name}}</td>
+      </tr>
+  </ng-template>
+</p-table>

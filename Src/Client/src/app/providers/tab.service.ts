@@ -1,4 +1,5 @@
 import { Injectable, Type } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Tab {
   title: string;
@@ -19,7 +20,7 @@ export class TabService {
   public tabs: Tab[] = [];
   public activeTab: Tab;
 
-  constructor() { }
+  constructor(private translateService: TranslateService) { }
 
   public init() {
 
@@ -33,6 +34,11 @@ export class TabService {
     });
 
     this.activeTab = this.tabs[this.tabs.length - 1];
+  }
+
+  public openTabWithTranslate(componentType: Type<TabbedComponent>, titleTranslateKey: string, parameters: any = null){
+    this.translateService.get(titleTranslateKey)
+      .subscribe(x => this.openTab(componentType, parameters, x));
   }
 
   public setActive(tab: Tab) {
